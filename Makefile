@@ -4,10 +4,10 @@ TESTS = test/*.js
 TEST_COVERAGE = test/coverage.html
 
 test:
-	@./node_modules/.bin/mocha --reporter $(REPORTER) $(TESTS)
+	@TEST=1 ./node_modules/.bin/mocha --reporter $(REPORTER) $(TESTS)
 
 test-cov: lib-cov
-	@EXPRESS_COV=1 $(MAKE) -s test REPORTER=html-cov > $(TEST_COVERAGE) && chromium-browser $(TEST_COVERAGE)
+	@COV=1 $(MAKE) -s test REPORTER=html-cov > $(TEST_COVERAGE) && chromium-browser $(TEST_COVERAGE)
 
 lib-cov:
 	@jscoverage --no-highlight lib lib-cov
@@ -25,4 +25,3 @@ clean:
 	rm -f -r $(TEST_COVERAGE) lib-cov
 
 .PHONY: test run clean lint lint-test
-
