@@ -13,6 +13,7 @@
     "mocha": "1.x"
   , "expect.js": "0.x"
   , "sinon": "1.x"
+  , "request": "2.x"
   }
   , "scripts": {
       "test": "make test"
