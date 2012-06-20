@@ -21,7 +21,10 @@ lint:
 lint-test:
 	jshint test/
 
+deploy:
+	jitsu deploy -r patch
+
 clean:
 	rm -f -r $(TEST_COVERAGE) lib-cov
 
-.PHONY: test run clean lint lint-test
+.PHONY: test run clean lint lint-test deploy
