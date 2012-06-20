@@ -1,25 +1,26 @@
 {
-    "name": "assnatapi"
-  , "description": "API pour exploiter les données de l'Assemblée nationale du Québec. Offre en mode données ouvertes (open data), de façon structurée et exploitable par programmation, les informations de l'Assemblée nationale du Québec (journaux des débats, députés, etc.)."
-  , "version": "0.1.0"
-  , "author": "Martin Angers <martin.n.angers@gmail.com>"
-  , "private": true
-  , "dependencies": {
-    "mongodb": "1.x"
-  , "restify": "1.x"
-  , "see-no-evil": "0.x"
-  }
-  , "devDependencies": {
-    "mocha": "1.x"
-  , "expect.js": "0.x"
-  , "sinon": "1.x"
-  , "request": "2.x"
-  }
-  , "scripts": {
-      "test": "make test"
-    , "start": "make run"
-  }
-  , "engines": { 
+  "name": "assnatapi",
+  "description": "API pour exploiter les données de l'Assemblée nationale du Québec. Offre en mode données ouvertes (open data), de façon structurée et exploitable par programmation, les informations de l'Assemblée nationale du Québec (journaux des débats, députés, etc.).",
+  "version": "0.1.0",
+  "author": "Martin Angers <martin.n.angers@gmail.com>",
+  "private": true,
+  "dependencies": {
+    "mongodb": "1.x",
+    "restify": "1.x",
+    "see-no-evil": "0.x"
+  },
+  "devDependencies": {
+    "mocha": "1.x",
+    "expect.js": "0.x",
+    "sinon": "1.x",
+    "request": "2.x"
+  },
+  "scripts": {
+    "test": "make test",
+    "start": "app.js"
+  },
+  "engines": {
     "node": ">= 0.6"
-  }
+  },
+  "subdomain": "assnatapi"
 }
