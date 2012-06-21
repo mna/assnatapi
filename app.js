@@ -1,7 +1,8 @@
 /*jshint asi:true, trailing:true*/
 
-var server = require('./lib/server'),
-  handler = require('./lib/handler'),
+var db = require('./lib/db'),
+  server = require('./lib/server'),
+  handler = require('./lib/handler')(db),
   router = require('./lib/router')
 
 // Setup the routes
