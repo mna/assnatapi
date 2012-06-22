@@ -7,10 +7,10 @@ test:
 	@TEST=1 ./node_modules/.bin/mocha --reporter $(REPORTER) $(TESTS)
 
 test-cov: lib-cov
-	@COV=1 $(MAKE) -s test REPORTER=html-cov > $(TEST_COVERAGE) && chromium-browser $(TEST_COVERAGE)
+	@ASSNAT_COV=1 $(MAKE) -s test REPORTER=html-cov > $(TEST_COVERAGE) && open $(TEST_COVERAGE)
 
 lib-cov:
-	@jscoverage --no-highlight lib lib-cov
+	@jscoverage lib lib-cov
 
 run:
 	node app.js

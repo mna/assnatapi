@@ -1,4 +1,4 @@
-var sut = require(process.env.COV ? '../lib-cov/util' : '../lib/util'),
+var sut = require(process.env.ASSNAT_COV ? '../lib-cov/util' : '../lib/util'),
   expect = require('expect.js')
 
 describe('util', function() {

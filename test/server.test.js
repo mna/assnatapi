@@ -1,7 +1,7 @@
 var HttpServer = require('http').Server,
   request = require('request'),
   sinon = require('sinon'),
-  sut = require(process.env.COV ? '../lib-cov/server' : '../lib/server'),
+  sut = require(process.env.ASSNAT_COV ? '../lib-cov/server' : '../lib/server'),
   expect = require('expect.js')
 
 describe('server', function() {
