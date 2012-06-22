@@ -1,6 +1,3 @@
-/*globals describe, it, before, beforeAll, after, afterAll*/
-/*jshint asi:true, trailing:true*/
-
 var HttpServer = require('http').Server,
   request = require('request'),
   sinon = require('sinon'),
@@ -52,4 +49,36 @@ describe('server', function() {
       done()
     })
   })
+/*
+  it('should allow multiple routes for a path in setupRoutes()', function(done) {
+    var routes = [{path:'/a', handler:['loadA', 'getA']}],
+      handler = {getA: function(req, res) {
+        console.log('get')
+        res.send({})
+        return
+      },
+      loadA: function(req, res, next){
+        console.log('load')
+        return next()
+      }},
+      mock = sinon.mock(handler)
+
+    mock.expects('loadA').once()
+    mock.expects('getA').once()
+
+    sut.setupRoutes(routes, handler)
+    sut.listen(3000, function() {
+      console.log('request')
+      request.get('http://localhost:3000/a', function(er, res, body) {
+        expect(er).to.be(null)
+        expect(res.statusCode).to.be(200)
+        mock.verify()
+        sut.close()
+      })
+    })
+    sut.once('close', function() {
+      done()
+    })
+  })
+*/
 })
