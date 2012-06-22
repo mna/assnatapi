@@ -162,4 +162,26 @@ describe('util', function() {
       expect(sut.getSkipValue({skip: '7'})).to.be(7)
     })
   })
+
+  describe('.buildOptionsObject', function() {
+    it('should be a function', function() {
+      expect(sut.buildOptionsObject).to.be.a('function')
+    })
+
+    it('should only return limit if qs is null', function() {
+      expect(sut.buildOptionsObject(null)).to.be.eql({limit: sut.DEFAULT_LIMIT})
+    })
+
+    it('should return limit and skip if skip != 0', function() {
+      expect(sut.buildOptionsObject({limit: '10', skip: '5'})).to.be.eql({limit: 10, skip: 5})
+    })
+
+    it('should return limit and sort', function() {
+      expect(sut.buildOptionsObject({limit: '10', sort: 'a,-b,c'})).to.be.eql({limit: 10, sort: {a:1, b:-1,c:1}})
+    })
+
+    it('should return the whole thing, ignoring other properties', function() {
+      expect(sut.buildOptionsObject({limit: '10', skip: '5', sort: 'a,-b,c', toto: '4'})).to.be.eql({limit: 10, skip: 5, sort: {a:1, b:-1,c:1}})
+    })
+  })
 })
