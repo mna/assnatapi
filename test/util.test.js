@@ -92,4 +92,74 @@ describe('util', function() {
       expect(sut.normalizeCriteria({a: '1'}, {a: {mapTo: 'b', isBoolean: true, mapReverseValue: false}})).to.be.eql({b: true})
     })
   })
+
+  describe('.getSortObject', function() {
+    it('should be a function', function() {
+      expect(sut.getSortObject).to.be.a('function')
+    })
+
+    it('should return null if qs is null', function() {
+      expect(sut.getSortObject(null)).to.be(null)
+    })
+
+    it('should return null if qs has no "sort" property', function() {
+      expect(sut.getSortObject({nosort: true})).to.be(null)
+    })
+
+    it('should return null if sort is empty', function() {
+      expect(sut.getSortObject({sort: ''})).to.be(null)
+    })
+
+    it('should return an object with sort field = 1', function() {
+      expect(sut.getSortObject({sort: 'a'})).to.be.eql({a: 1})
+    })
+
+    it('should return an object with multiple sort fields comma-separated', function() {
+      expect(sut.getSortObject({sort: 'a,b,c'})).to.be.eql({a: 1, b: 1, c: 1})
+    })
+
+    it('should make a minus-prefixed field a descending sort', function() {
+      expect(sut.getSortObject({sort: 'a,-b,-c'})).to.be.eql({a: 1, b: -1, c: -1})
+    })
+  })
+
+  describe('.getLimitValue', function() {
+    it('should be a function', function() {
+      expect(sut.getLimitValue).to.be.a('function')
+    })
+
+    it('should return the default value if qs is null', function() {
+      expect(sut.getLimitValue(null)).to.be(sut.DEFAULT_LIMIT)
+    })
+
+    it('should ignore invalid numbers', function() {
+      expect(sut.getLimitValue({limit: 'a2d2'})).to.be(sut.DEFAULT_LIMIT)
+    })
+
+    it('should limit to the maximum default value', function() {
+      expect(sut.getLimitValue({limit: '123456'})).to.be(sut.DEFAULT_LIMIT)
+    })
+
+    it('should use the provided value', function() {
+      expect(sut.getLimitValue({limit: '10'})).to.be(10)
+    })
+  })
+
+  describe('.getSkipValue', function() {
+    it('should be a function', function() {
+      expect(sut.getSkipValue).to.be.a('function')
+    })
+
+    it('should return null|undefined if qs is null', function() {
+      expect(sut.getSkipValue(null)).to.not.be.ok()
+    })
+
+    it('should ignore invalid numbers', function() {
+      expect(sut.getSkipValue({skip: 'wfwef'})).to.not.be.ok()
+    })
+
+    it('should use the provided value', function() {
+      expect(sut.getSkipValue({skip: '7'})).to.be(7)
+    })
+  })
 })
