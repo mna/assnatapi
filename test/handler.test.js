@@ -178,4 +178,89 @@ describe('handler', function() {
       })
     })
   })
+
+  describe('.getMeetings', function() {
+    it('should be a function', function() {
+      expect(sut.getMeetings).to.be.a('function')
+    })
+
+    it('should return all meetings, augmented', function() {
+      var req = {},
+        res = {},
+        next = noop
+
+      res.send = function(meets) {
+        expect(meets).to.be.an('array')
+        expect(meets.length).to.be(8)
+        expect(meets.every(function(val) {
+          return val.interventionsPath === '/meetings/' + val.id + '/interventions'
+        })).to.be.ok()
+      }
+      sut.getMeetings(req, res, next)
+    })
+  })
+
+  describe('.loadMeeting', function() {
+    it('should be a function', function() {
+      expect(sut.loadMeeting).to.be.a('function')
+    })
+
+    it('should set the meeting object on req.params.meet', function() {
+      var req = {},
+        res = {}
+
+      req.params = {
+        idMeeting: '42.121'
+      }
+
+      sut.loadMeeting(req, res, function() {
+        expect(req.params.meet).to.be.an('object')
+        expect(req.params.meet.id).to.be('42.121')
+      })
+    })
+
+    it('should return a 404 error if meeting is invalid', function() {
+      var req = {},
+        res = {}
+
+      req.params = {
+        idMeeting: 'toto'
+      }
+      res.send = function(er) {
+        expect(er).to.be.an(restify.ResourceNotFoundError)
+        expect(er.message).to.contain('existe pas')
+        expect(er.statusCode).to.be(404)
+      }
+      sut.loadMeeting(req, res)
+    })
+  })
+
+  describe('.getMeeting', function() {
+    it('should be a function', function() {
+      expect(sut.getMeeting).to.be.a('function')
+    })
+
+    it('should return an augmented meeting', function() {
+      var req = {},
+        res = {},
+        next = noop
+
+      req.params = {
+        idMeeting: '42.123'
+      }
+
+      res.send = function(meet) {
+        expect(meet).to.be.an('object')
+        expect(meet.id).to.be('42.123')
+        expect(meet).to.have.key('interventionsPath')
+        expect(meet.interventionsPath).to.be('/meetings/42.123/interventions')
+      }
+
+      // First call loadMeeting
+      sut.loadMeeting(req, res, function() {
+        // Then call getMeeting
+        sut.getMeeting(req, res, next)
+      })
+    })
+  })
 })

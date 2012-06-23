@@ -257,7 +257,88 @@ var allDeps = [
     "text" : "Deuxième complémentaire, M. le député de Chambly.",
     "time" : "2012-06-05T14:10:00Z"
   }],
-  me = {deputies: {}, interventions: {}}
+  allMeetings = [
+  {
+    "url" : "http://www.assnat.qc.ca/fr/travaux-parlementaires/assemblee-nationale/39-2/journal-debats/20120615/61547.html",
+    "meetingType" : "Assemblée",
+    "status" : "finale",
+    "session" : "39.2",
+    "day" : "vendredi",
+    "date" : "2012-06-15T04:00:00Z",
+    "id" : "42.123",
+    "_id" : "4fe1de778193ec0a3c00007d"
+  },
+  {
+    "url" : "http://www.assnat.qc.ca/fr/travaux-parlementaires/assemblee-nationale/39-2/journal-debats/20120614/61415.html",
+    "meetingType" : "Assemblée",
+    "status" : "finale",
+    "session" : "39.2",
+    "day" : "jeudi",
+    "date" : "2012-06-14T04:00:00Z",
+    "id" : "42.122",
+    "_id" : "4fe1de8a3a66f91c3c000001"
+  },
+  {
+    "url" : "http://www.assnat.qc.ca/fr/travaux-parlementaires/assemblee-nationale/39-2/journal-debats/20120613/61247.html",
+    "meetingType" : "Assemblée",
+    "status" : "finale",
+    "session" : "39.2",
+    "day" : "mercredi",
+    "date" : "2012-06-13T04:00:00Z",
+    "id" : "42.121",
+    "_id" : "4fe1de9cda5cd81f3c000001"
+  },
+  {
+    "url" : "http://www.assnat.qc.ca/fr/travaux-parlementaires/assemblee-nationale/39-2/journal-debats/20120612/61123.html",
+    "meetingType" : "Assemblée",
+    "status" : "finale",
+    "session" : "39.2",
+    "day" : "mardi",
+    "date" : "2012-06-12T04:00:00Z",
+    "id" : "42.120",
+    "_id" : "4fe1deb1bc4205223c000001"
+  },
+  {
+    "url" : "http://www.assnat.qc.ca/fr/travaux-parlementaires/assemblee-nationale/39-2/journal-debats/20120608/60885.html",
+    "meetingType" : "Assemblée",
+    "status" : "finale",
+    "session" : "39.2",
+    "day" : "vendredi",
+    "date" : "2012-06-08T04:00:00Z",
+    "id" : "42.119",
+    "_id" : "4fe1dec4b36915273c000001"
+  },
+  {
+    "url" : "http://www.assnat.qc.ca/fr/travaux-parlementaires/assemblee-nationale/39-2/journal-debats/20120607/60747.html",
+    "meetingType" : "Assemblée",
+    "status" : "finale",
+    "session" : "39.2",
+    "day" : "jeudi",
+    "date" : "2012-06-07T04:00:00Z",
+    "id" : "42.118",
+    "_id" : "4fe1ded23b97402b3c000001"
+  },
+  {
+    "url" : "http://www.assnat.qc.ca/fr/travaux-parlementaires/assemblee-nationale/39-2/journal-debats/20120606/60601.html",
+    "meetingType" : "Assemblée",
+    "status" : "finale",
+    "session" : "39.2",
+    "day" : "mercredi",
+    "date" : "2012-06-06T04:00:00Z",
+    "id" : "42.117",
+    "_id" : "4fe1dee104e2c72f3c000001"
+  },
+  {
+    "url" : "http://www.assnat.qc.ca/fr/travaux-parlementaires/assemblee-nationale/39-2/journal-debats/20120605/60477.html",
+    "meetingType" : "Assemblée",
+    "status" : "finale",
+    "session" : "39.2",
+    "day" : "mardi",
+    "date" : "2012-06-05T04:00:00Z",
+    "id" : "42.116",
+    "_id" : "4fe1def25fcf7c323c000001"
+  }],
+  me = {deputies: {}, interventions: {}, meetings: {}}
 
 function getOne(ar, id) {
   var found,
@@ -288,6 +369,14 @@ me.interventions.getAll = function(qs, cb) {
 
 me.interventions.get = function(id, cb) {
   cb(null, getOne(allInts, id))
+}
+
+me.meetings.getAll = function(qs, cb) {
+  cb(null, allMeetings)
+}
+
+me.meetings.get = function(id, cb) {
+  cb(null, getOne(allMeetings, id))
 }
 
 module.exports = me
