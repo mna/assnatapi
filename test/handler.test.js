@@ -72,4 +72,25 @@ describe('handler', function() {
       })
     })
   })
+
+  describe('.getDeputies', function() {
+    it('should be a function', function() {
+      expect(sut.getDeputies).to.be.a('function')
+    })
+
+    it('should return all deputies, augmented', function() {
+      var req = {},
+        res = {},
+        next = noop
+
+      res.send = function(deps) {
+        expect(deps).to.be.an('array')
+        expect(deps.length).to.be(10)
+        expect(deps.every(function(val) {
+          return val.interventionsPath === '/deputies/' + val.id + '/interventions'
+        })).to.be.ok()
+      }
+      sut.getDeputies(req, res, next)
+    })
+  })
 })
