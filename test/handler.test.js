@@ -93,4 +93,89 @@ describe('handler', function() {
       sut.getDeputies(req, res, next)
     })
   })
+
+  describe('.getInterventions', function() {
+    it('should be a function', function() {
+      expect(sut.getInterventions).to.be.a('function')
+    })
+
+    it('should return all interventions, augmented', function() {
+      var req = {},
+        res = {},
+        next = noop
+
+      res.send = function(ints) {
+        expect(ints).to.be.an('array')
+        expect(ints.length).to.be(9)
+        expect(ints.every(function(val) {
+          return val.meetingPath && (val.nextInterventionPath || val.prevInterventionPath)
+        })).to.be.ok()
+      }
+      sut.getInterventions(req, res, next)
+    })
+  })
+
+  describe('.loadIntervention', function() {
+    it('should be a function', function() {
+      expect(sut.loadIntervention).to.be.a('function')
+    })
+
+    it('should set the intervention object on req.params.intr', function() {
+      var req = {},
+        res = {}
+
+      req.params = {
+        idInt: '42.119.46'
+      }
+
+      sut.loadIntervention(req, res, function() {
+        expect(req.params.intr).to.be.an('object')
+        expect(req.params.intr.id).to.be('42.119.46')
+      })
+    })
+
+    it('should return a 404 error if intervention is invalid', function() {
+      var req = {},
+        res = {}
+
+      req.params = {
+        idInt: 'toto'
+      }
+      res.send = function(er) {
+        expect(er).to.be.an(restify.ResourceNotFoundError)
+        expect(er.message).to.contain('existe pas')
+        expect(er.statusCode).to.be(404)
+      }
+      sut.loadIntervention(req, res)
+    })
+  })
+
+  describe('.getIntervention', function() {
+    it('should be a function', function() {
+      expect(sut.getIntervention).to.be.a('function')
+    })
+
+    it('should return an augmented intervention', function() {
+      var req = {},
+        res = {},
+        next = noop
+
+      req.params = {
+        idInt: '42.118.129'
+      }
+
+      res.send = function(intr) {
+        expect(intr).to.be.an('object')
+        expect(intr.id).to.be('42.118.129')
+        expect(intr).to.have.key('meetingPath')
+        expect(intr).to.have.key('deputyPath')
+      }
+
+      // First call loadIntervention
+      sut.loadIntervention(req, res, function() {
+        // Then call getIntervention
+        sut.getIntervention(req, res, next)
+      })
+    })
+  })
 })
