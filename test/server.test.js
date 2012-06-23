@@ -69,13 +69,11 @@ describe('server', function() {
   it('should allow multiple routes for a path in setupRoutes()', function(done) {
     var routes = [{path:'/a', handler:['loadA', 'getA']}],
       handler = {getA: function(req, res) {
-        console.log('get')
         res.send({})
         i++
         return
       },
       loadA: function(req, res, next){
-        console.log('load')
         i++
         return next()
       }},
@@ -83,7 +81,6 @@ describe('server', function() {
 
     sut.setupRoutes(routes, handler)
     sut.listen(3000, function() {
-      console.log('request')
       request.get('http://localhost:3000/a', function(er, res, body) {
         expect(er).to.be(null)
         expect(res.statusCode).to.be(200)

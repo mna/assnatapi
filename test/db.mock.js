@@ -364,7 +364,21 @@ me.deputies.get = function(id, cb) {
 }
 
 me.interventions.getAll = function(qs, cb) {
-  cb(null, allInts)
+  var ar
+
+  if (qs) {
+    ar = allInts.filter(function(val) {
+      if (qs.deputy && val.deputyId === qs.deputy) {
+        return true
+      } else if (qs.meeting && val.meetingId === qs.meeting) {
+        return true
+      }
+      return false
+    })
+    cb(null, ar)
+  } else {
+    cb(null, allInts)
+  }
 }
 
 me.interventions.get = function(id, cb) {

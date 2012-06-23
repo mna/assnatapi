@@ -263,4 +263,180 @@ describe('handler', function() {
       })
     })
   })
+
+  describe('.getDeputyInterventions', function() {
+    it('should be a function', function() {
+      expect(sut.getDeputyInterventions).to.be.a('function')
+    })
+
+    it('should return only the interventions of the deputy', function() {
+      var req = {},
+        res = {},
+        next = noop
+
+      req.params = {
+        idDep: 'charest-jean-525'
+      }
+      req.query = {}
+
+      res.send = function(ints) {
+        expect(ints).to.be.an('array')
+        expect(ints.length).to.be(1)
+        expect(ints.every(function(val) {
+          return val.deputyPath === '/deputies/charest-jean-525'
+        })).to.be.ok()
+      }
+
+      sut.getDeputyInterventions(req, res, next)
+    })
+  })
+
+  describe('.getDeputyIntervention', function() {
+    it('should be a function', function() {
+      expect(sut.getDeputyIntervention).to.be.a('function')
+    })
+
+    it('should return the requested deputy intervention', function() {
+      var req = {},
+        res = {},
+        next = noop
+
+      req.params = {
+        idDep: 'james-yolande-49',
+        idInt: '42.118.129'
+      }
+      res.send = function(intr) {
+        expect(intr).to.be.an('object')
+        expect(intr.id).to.be('42.118.129')
+        expect(intr.deputyId).to.be('james-yolande-49')
+        expect(intr).to.have.key('meetingPath')
+        expect(intr).to.have.key('deputyPath')
+        expect(intr.deputyPath).to.be('/deputies/james-yolande-49')
+      }
+
+      sut.getDeputyIntervention(req, res, next)
+    })
+
+    it('should return a 404 error if intervention is invalid', function() {
+      var req = {},
+        res = {},
+        next = noop
+
+      req.params = {
+        idDep: 'james-yolande-49',
+        idInt: 'toto'
+      }
+      res.send = function(er) {
+        expect(er).to.be.an(restify.ResourceNotFoundError)
+        expect(er.message).to.contain('existe pas')
+        expect(er.statusCode).to.be(404)
+      }
+      sut.getDeputyIntervention(req, res, next)
+    })
+
+    it('should return a 404 error if intervention and deputy do not fit', function() {
+      var req = {},
+        res = {},
+        next = noop
+
+      req.params = {
+        idDep: 'james-yolande-49',
+        idInt: '42.118.127'
+      }
+      res.send = function(er) {
+        expect(er).to.be.an(restify.ResourceNotFoundError)
+        expect(er.message).to.contain('existe pas')
+        expect(er.statusCode).to.be(404)
+      }
+      sut.getDeputyIntervention(req, res, next)
+    })
+  })
+
+  describe('.getMeetingInterventions', function() {
+    it('should be a function', function() {
+      expect(sut.getMeetingInterventions).to.be.a('function')
+    })
+
+    it('should return only the interventions of the meeting', function() {
+      var req = {},
+        res = {},
+        next = noop
+
+      req.params = {
+        idMeeting: '42.117'
+      }
+      req.query = {}
+
+      res.send = function(ints) {
+        expect(ints).to.be.an('array')
+        expect(ints.length).to.be(3)
+        expect(ints.every(function(val) {
+          return val.meetingPath === '/meetings/42.117'
+        })).to.be.ok()
+      }
+
+      sut.getMeetingInterventions(req, res, next)
+    })
+  })
+
+  describe('.getMeetingIntervention', function() {
+    it('should be a function', function() {
+      expect(sut.getMeetingIntervention).to.be.a('function')
+    })
+
+    it('should return the requested meeting intervention', function() {
+      var req = {},
+        res = {},
+        next = noop
+
+      req.params = {
+        idMeeting: '42.118',
+        idInt: '42.118.129'
+      }
+      res.send = function(intr) {
+        expect(intr).to.be.an('object')
+        expect(intr.id).to.be('42.118.129')
+        expect(intr.meetingId).to.be('42.118')
+        expect(intr).to.have.key('meetingPath')
+        expect(intr).to.have.key('deputyPath')
+        expect(intr.meetingPath).to.be('/meetings/42.118')
+      }
+
+      sut.getMeetingIntervention(req, res, next)
+    })
+
+    it('should return a 404 error if intervention is invalid', function() {
+      var req = {},
+        res = {},
+        next = noop
+
+      req.params = {
+        idMeeting: '42.122',
+        idInt: 'toto'
+      }
+      res.send = function(er) {
+        expect(er).to.be.an(restify.ResourceNotFoundError)
+        expect(er.message).to.contain('existe pas')
+        expect(er.statusCode).to.be(404)
+      }
+      sut.getMeetingIntervention(req, res, next)
+    })
+
+    it('should return a 404 error if intervention and meeting do not fit', function() {
+      var req = {},
+        res = {},
+        next = noop
+
+      req.params = {
+        idMeeting: '42.122',
+        idInt: '42.118.127'
+      }
+      res.send = function(er) {
+        expect(er).to.be.an(restify.ResourceNotFoundError)
+        expect(er.message).to.contain('existe pas')
+        expect(er.statusCode).to.be(404)
+      }
+      sut.getMeetingIntervention(req, res, next)
+    })
+  })
 })
