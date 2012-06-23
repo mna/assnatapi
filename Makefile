@@ -1,6 +1,6 @@
 .DEFAULT_GOAL = run
 REPORTER = spec
-TESTS = test/*.js
+TESTS = test/*.test.js
 TEST_COVERAGE = test/coverage.html
 
 test:
