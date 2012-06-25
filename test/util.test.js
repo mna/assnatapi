@@ -80,12 +80,40 @@ describe('util', function() {
       expect(sut.normalizeCriteria({a: 'true'}, {a: {isBoolean: true, falseValues: ["true"]}})).to.be.eql({a: false})
     })
 
-    it('should return a regular expression if requested', function() {
-      expect(sut.normalizeCriteria({a: 'test'}, {a: {wrapInRegex: true}}).a.toString()).to.be('/test/i')
+    it('should return the value as is if no star is used with wrapInRegex', function() {
+      expect(sut.normalizeCriteria({a: 'test'}, {a: {wrapInRegex: true}})).to.be.eql({a: 'test'})
     })
 
-    it('should return the escaped string as regular expression if requested', function() {
-      expect(sut.normalizeCriteria({a: '/test[-]$'}, {a: {wrapInRegex: true}}).a.toString()).to.be('/\\/test\\[\\-\\]\\$/i')
+    it('should return an unescaped string as is if no star and wrapInRegex', function() {
+      expect(sut.normalizeCriteria({a: '/test[-]$'}, {a: {wrapInRegex: true}})).to.be.eql({a: '/test[-]$'})
+    })
+
+    it('should return the value as regex if start star and wrapInRegex', function() {
+      expect(sut.normalizeCriteria({a: '*test'}, {a: {wrapInRegex: true}}).a.toString()).to.be('/test$/i')
+    })
+
+    it('should return the value as regex if end star and wrapInRegex', function() {
+      expect(sut.normalizeCriteria({a: 'test*'}, {a: {wrapInRegex: true}}).a.toString()).to.be('/^test/i')
+    })
+
+    it('should return the value as regex if both stars and wrapInRegex', function() {
+      expect(sut.normalizeCriteria({a: '*test*'}, {a: {wrapInRegex: true}}).a.toString()).to.be('/test/i')
+    })
+
+    it('should return an escaped string if start star and wrapInRegex', function() {
+      expect(sut.normalizeCriteria({a: '*/test[-]$'}, {a: {wrapInRegex: true}}).a.toString()).to.be('/\\/test\\[\\-\\]\\$$/i')
+    })
+
+    it('should return an escaped string if end star and wrapInRegex', function() {
+      expect(sut.normalizeCriteria({a: '/test[-]$*'}, {a: {wrapInRegex: true}}).a.toString()).to.be('/^\\/test\\[\\-\\]\\$/i')
+    })
+
+    it('should return an escaped string if both stars and wrapInRegex', function() {
+      expect(sut.normalizeCriteria({a: '*/test[-]$*'}, {a: {wrapInRegex: true}}).a.toString()).to.be('/\\/test\\[\\-\\]\\$/i')
+    })
+
+    it('should escape middle stars when stars and wrapInRegex', function() {
+      expect(sut.normalizeCriteria({a: '*/te*st[-]$*'}, {a: {wrapInRegex: true}}).a.toString()).to.be('/\\/te\\*st\\[\\-\\]\\$/i')
     })
 
     it('should return an object with the mapTo property', function() {
