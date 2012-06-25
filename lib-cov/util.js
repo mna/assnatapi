@@ -44,26 +44,39 @@ if (! _$jscoverage['util.js']) {
   _$jscoverage['util.js'][118] = 0;
   _$jscoverage['util.js'][137] = 0;
   _$jscoverage['util.js'][138] = 0;
-  _$jscoverage['util.js'][143] = 0;
-  _$jscoverage['util.js'][144] = 0;
+  _$jscoverage['util.js'][146] = 0;
   _$jscoverage['util.js'][147] = 0;
-  _$jscoverage['util.js'][148] = 0;
-  _$jscoverage['util.js'][149] = 0;
   _$jscoverage['util.js'][150] = 0;
   _$jscoverage['util.js'][151] = 0;
   _$jscoverage['util.js'][152] = 0;
+  _$jscoverage['util.js'][153] = 0;
   _$jscoverage['util.js'][154] = 0;
   _$jscoverage['util.js'][155] = 0;
-  _$jscoverage['util.js'][156] = 0;
+  _$jscoverage['util.js'][157] = 0;
   _$jscoverage['util.js'][158] = 0;
-  _$jscoverage['util.js'][160] = 0;
   _$jscoverage['util.js'][163] = 0;
+  _$jscoverage['util.js'][164] = 0;
+  _$jscoverage['util.js'][165] = 0;
+  _$jscoverage['util.js'][166] = 0;
   _$jscoverage['util.js'][167] = 0;
-  _$jscoverage['util.js'][175] = 0;
+  _$jscoverage['util.js'][169] = 0;
+  _$jscoverage['util.js'][170] = 0;
+  _$jscoverage['util.js'][171] = 0;
+  _$jscoverage['util.js'][173] = 0;
+  _$jscoverage['util.js'][174] = 0;
   _$jscoverage['util.js'][176] = 0;
   _$jscoverage['util.js'][177] = 0;
   _$jscoverage['util.js'][179] = 0;
-  _$jscoverage['util.js'][182] = 0;
+  _$jscoverage['util.js'][180] = 0;
+  _$jscoverage['util.js'][183] = 0;
+  _$jscoverage['util.js'][185] = 0;
+  _$jscoverage['util.js'][188] = 0;
+  _$jscoverage['util.js'][192] = 0;
+  _$jscoverage['util.js'][200] = 0;
+  _$jscoverage['util.js'][201] = 0;
+  _$jscoverage['util.js'][202] = 0;
+  _$jscoverage['util.js'][204] = 0;
+  _$jscoverage['util.js'][207] = 0;
 }
 _$jscoverage['util.js'][2]++;
 var rxNumber = /^\s*\d+\s*$/, me = {DEFAULT_LIMIT: 1000};
@@ -167,58 +180,88 @@ me.getSortObject = (function (qs) {
 _$jscoverage['util.js'][137]++;
 me.normalizeCriteria = (function (crit, specs) {
   _$jscoverage['util.js'][138]++;
-  var res = {}, val, falseVals, trueVals;
-  _$jscoverage['util.js'][143]++;
+  var res = {}, val, falseVals, trueVals, startToken, endToken, isRegex;
+  _$jscoverage['util.js'][146]++;
   if (! crit || ! specs) {
-    _$jscoverage['util.js'][144]++;
+    _$jscoverage['util.js'][147]++;
     return null;
   }
-  _$jscoverage['util.js'][147]++;
+  _$jscoverage['util.js'][150]++;
   for (var key in specs) {
-    _$jscoverage['util.js'][148]++;
+    _$jscoverage['util.js'][151]++;
     val = crit[key];
-    _$jscoverage['util.js'][149]++;
+    _$jscoverage['util.js'][152]++;
     if (typeof val !== "undefined") {
-      _$jscoverage['util.js'][150]++;
+      _$jscoverage['util.js'][153]++;
       if (specs[key].isBoolean) {
-        _$jscoverage['util.js'][151]++;
-        trueVals = specs[key].trueValues || ["true", "1"];
-        _$jscoverage['util.js'][152]++;
-        falseVals = specs[key].falseValues;
         _$jscoverage['util.js'][154]++;
+        trueVals = specs[key].trueValues || ["true", "1"];
+        _$jscoverage['util.js'][155]++;
+        falseVals = specs[key].falseValues;
+        _$jscoverage['util.js'][157]++;
         val = (falseVals && falseVals.length? falseVals.indexOf(val) < 0: trueVals.indexOf(val) >= 0);
       }
       else {
-        _$jscoverage['util.js'][155]++;
+        _$jscoverage['util.js'][158]++;
         if (specs[key].wrapInRegex) {
-          _$jscoverage['util.js'][156]++;
-          val = new RegExp(me.escapeForRegex(val), "i");
+          _$jscoverage['util.js'][163]++;
+          startToken = "";
+          _$jscoverage['util.js'][164]++;
+          endToken = "";
+          _$jscoverage['util.js'][165]++;
+          if (val.substr(val.length - 1, 1) === "*") {
+            _$jscoverage['util.js'][166]++;
+            startToken = "^";
+            _$jscoverage['util.js'][167]++;
+            val = val.substr(0, val.length - 1);
+          }
+          _$jscoverage['util.js'][169]++;
+          if (val.substr(0, 1) === "*") {
+            _$jscoverage['util.js'][170]++;
+            endToken = "$";
+            _$jscoverage['util.js'][171]++;
+            val = val.substr(1);
+          }
+          _$jscoverage['util.js'][173]++;
+          isRegex = (startToken || endToken);
+          _$jscoverage['util.js'][174]++;
+          if (startToken && endToken) {
+            _$jscoverage['util.js'][176]++;
+            startToken = "";
+            _$jscoverage['util.js'][177]++;
+            endToken = "";
+          }
+          _$jscoverage['util.js'][179]++;
+          if (isRegex) {
+            _$jscoverage['util.js'][180]++;
+            val = new RegExp(startToken + me.escapeForRegex(val) + endToken, "i");
+          }
         }
       }
-      _$jscoverage['util.js'][158]++;
+      _$jscoverage['util.js'][183]++;
       if (specs[key].mapTo) {
-        _$jscoverage['util.js'][160]++;
+        _$jscoverage['util.js'][185]++;
         res[specs[key].mapTo] = (specs[key].isBoolean && specs[key].mapReverseValue? ! val: val);
       }
       else {
-        _$jscoverage['util.js'][163]++;
+        _$jscoverage['util.js'][188]++;
         res[key] = val;
       }
     }
 }
-  _$jscoverage['util.js'][167]++;
+  _$jscoverage['util.js'][192]++;
   return res;
 });
-_$jscoverage['util.js'][175]++;
+_$jscoverage['util.js'][200]++;
 me.escapeForRegex = (function (src) {
-  _$jscoverage['util.js'][176]++;
+  _$jscoverage['util.js'][201]++;
   if (! src) {
-    _$jscoverage['util.js'][177]++;
+    _$jscoverage['util.js'][202]++;
     return src;
   }
-  _$jscoverage['util.js'][179]++;
+  _$jscoverage['util.js'][204]++;
   return src.replace(/[-/\\^$*+?.()|[\]{}]/g, "\\$&");
 });
-_$jscoverage['util.js'][182]++;
+_$jscoverage['util.js'][207]++;
 module.exports = me;
-_$jscoverage['util.js'].source = ["/*jshint regexdash:true*/","var rxNumber = /^\\s*\\d+\\s*$/,","  me = {DEFAULT_LIMIT: 1000}","","/*","** extend(target, src1, src2, ...)","**","** Extend a given object by copying each property of the following object(s) to it.","** The last object in the list wins if there is a name conflict. This is more or less","** the same as Underscore extend().","*/","me.extend = function(obj) {","  var args = Array.prototype.slice.call(arguments, 1)","","  if (!obj) {","    return obj","  }","","  args.forEach(function(source) {","    for (var prop in source) {","      obj[prop] = source[prop]","    }","  })","  return obj","}","","/*","** buildOptionsObject(qs)","**","** Takes a parsed query string object, and builds a full options object, with","** the sort criteria, the limit value, and the skip value, ready to be used","** by db.collection.find().","*/","me.buildOptionsObject = function(qs) {","  var opts = {},","    limit = me.getLimitValue(qs),","    skip = me.getSkipValue(qs),","    sort = me.getSortObject(qs)","","  // Limit is always present","  opts.limit = limit","","  // Skip is present only if != 0","  if (skip) {","    opts.skip = skip","  }","","  // Sort is present only if specified in query string","  if (sort) {","    opts.sort = sort","  }","","  return opts","}","","/*","** getSkipValue(qs)","**","** Takes a parsed query string object, and looks for a \"skip\" key. If there is one, and it is","** a valid number, then it uses this value as the number of objects to skip before starting","** to return documents.","*/","me.getSkipValue = function(qs) {","  var val","","  if (qs &amp;&amp; qs.skip) {","    if (rxNumber.test(qs.skip)) {","      val = parseInt(qs.skip, 10)","    }","  }","","  return val","}","","/*","** getLimitValue(qs)","**","** Takes a parsed query string object, and looks for a \"limit\" key. If there is one, and it is","** a valid number, then it uses this value as the limit of objects returned.","*/","me.getLimitValue = function(qs) {","  var val","","  if (qs &amp;&amp; qs.limit) {","    if (rxNumber.test(qs.limit)) {","      val = Math.min(parseInt(qs.limit, 10), me.DEFAULT_LIMIT)","    }","  }","","  return val || me.DEFAULT_LIMIT","}","","/*","** getSortObject(qs)","**","** Takes a parsed query string object, and looks for a \"sort\" key. If there is one, then a sort","** object will be returned. Sort fields are specified as a comma-separated list of fields, and","** a descending sort may be specified by prefixing the field with a minus (-).","*/","me.getSortObject = function(qs) {","  var sort = {},","    vals,","    val","","  if (!qs || !qs.sort) {","    return null","  }","","  vals = qs.sort.split(',')","  for (var i = 0; i &lt; vals.length; i++) {","    val = vals[i].trim()","    if (val.substr(0, 1) === '-') {","      sort[val.substr(1)] = -1","    } else {","      sort[val] = 1","    }","  }","  return sort","}","","/*","** normalizeCriteria()","**","** Take a criteria object (typically, a parsed query string object) and a specifications object","** and whitelists criteria according to the specs.","**","** specs format:","** key: name of a field to act upon","** value: either a boolean (true: allow, false: ignore) or an object:","**   - isBoolean: true if the criterion is a boolean","**   - wrapInRegex: true if the value should be escaped and wrapped in a regular expression (i.e.: /val/i)","**   - trueValues: array of values to be considered true (strings), defaults to ['true', '1']","**   - falseValues: array of values to be considered false (strings), defaults to null (uses trueValues)","**   - mapTo: name of a key to use instead of this key (ex.: \"a\" provided as a shorthand for \"active\")","**   - mapReverseValue: boolean. In the case of a boolean value, maps to \"mapTo\" and reverses the boolean value (true&lt;-&gt;false)","*/","me.normalizeCriteria = function(crit, specs) {","  var res = {},","    val,","    falseVals,","    trueVals","","  if (!crit || !specs) {","    return null","  }","","  for (var key in specs) {","    val = crit[key]","    if (typeof val !== 'undefined') {","      if (specs[key].isBoolean) {","        trueVals = specs[key].trueValues || ['true', '1']","        falseVals = specs[key].falseValues","","        val = (falseVals &amp;&amp; falseVals.length ? falseVals.indexOf(val) &lt; 0 : trueVals.indexOf(val) &gt;= 0)","      } else if (specs[key].wrapInRegex) {","        val = new RegExp(me.escapeForRegex(val), 'i')","      }","      if (specs[key].mapTo) {","        // Override res[key], no matter if something was present. Do not send incoherent criteria.","        res[specs[key].mapTo] = (specs[key].isBoolean &amp;&amp; specs[key].mapReverseValue ? !val : val)","      } else {","        // Set the key as is on the result object","        res[key] = val","      }","    }","  }","  return res","}","","/*","** escapeForRegex(src)","**","** Escapes a given string for use in a regular expression.","*/","me.escapeForRegex = function(src) {","  if (!src) {","    return src","  }","  return src.replace(/[-/\\\\^$*+?.()|[\\]{}]/g, '\\\\$&amp;')","}","","module.exports = me"];
+_$jscoverage['util.js'].source = ["/*jshint regexdash:true*/","var rxNumber = /^\\s*\\d+\\s*$/,","  me = {DEFAULT_LIMIT: 1000}","","/*","** extend(target, src1, src2, ...)","**","** Extend a given object by copying each property of the following object(s) to it.","** The last object in the list wins if there is a name conflict. This is more or less","** the same as Underscore extend().","*/","me.extend = function(obj) {","  var args = Array.prototype.slice.call(arguments, 1)","","  if (!obj) {","    return obj","  }","","  args.forEach(function(source) {","    for (var prop in source) {","      obj[prop] = source[prop]","    }","  })","  return obj","}","","/*","** buildOptionsObject(qs)","**","** Takes a parsed query string object, and builds a full options object, with","** the sort criteria, the limit value, and the skip value, ready to be used","** by db.collection.find().","*/","me.buildOptionsObject = function(qs) {","  var opts = {},","    limit = me.getLimitValue(qs),","    skip = me.getSkipValue(qs),","    sort = me.getSortObject(qs)","","  // Limit is always present","  opts.limit = limit","","  // Skip is present only if != 0","  if (skip) {","    opts.skip = skip","  }","","  // Sort is present only if specified in query string","  if (sort) {","    opts.sort = sort","  }","","  return opts","}","","/*","** getSkipValue(qs)","**","** Takes a parsed query string object, and looks for a \"skip\" key. If there is one, and it is","** a valid number, then it uses this value as the number of objects to skip before starting","** to return documents.","*/","me.getSkipValue = function(qs) {","  var val","","  if (qs &amp;&amp; qs.skip) {","    if (rxNumber.test(qs.skip)) {","      val = parseInt(qs.skip, 10)","    }","  }","","  return val","}","","/*","** getLimitValue(qs)","**","** Takes a parsed query string object, and looks for a \"limit\" key. If there is one, and it is","** a valid number, then it uses this value as the limit of objects returned.","*/","me.getLimitValue = function(qs) {","  var val","","  if (qs &amp;&amp; qs.limit) {","    if (rxNumber.test(qs.limit)) {","      val = Math.min(parseInt(qs.limit, 10), me.DEFAULT_LIMIT)","    }","  }","","  return val || me.DEFAULT_LIMIT","}","","/*","** getSortObject(qs)","**","** Takes a parsed query string object, and looks for a \"sort\" key. If there is one, then a sort","** object will be returned. Sort fields are specified as a comma-separated list of fields, and","** a descending sort may be specified by prefixing the field with a minus (-).","*/","me.getSortObject = function(qs) {","  var sort = {},","    vals,","    val","","  if (!qs || !qs.sort) {","    return null","  }","","  vals = qs.sort.split(',')","  for (var i = 0; i &lt; vals.length; i++) {","    val = vals[i].trim()","    if (val.substr(0, 1) === '-') {","      sort[val.substr(1)] = -1","    } else {","      sort[val] = 1","    }","  }","  return sort","}","","/*","** normalizeCriteria()","**","** Take a criteria object (typically, a parsed query string object) and a specifications object","** and whitelists criteria according to the specs.","**","** specs format:","** key: name of a field to act upon","** value: either a boolean (true: allow, false: ignore) or an object:","**   - isBoolean: true if the criterion is a boolean","**   - wrapInRegex: true if the value should be escaped and wrapped in a regular expression (i.e.: /val/i)","**   - trueValues: array of values to be considered true (strings), defaults to ['true', '1']","**   - falseValues: array of values to be considered false (strings), defaults to null (uses trueValues)","**   - mapTo: name of a key to use instead of this key (ex.: \"a\" provided as a shorthand for \"active\")","**   - mapReverseValue: boolean. In the case of a boolean value, maps to \"mapTo\" and reverses the boolean value (true&lt;-&gt;false)","*/","me.normalizeCriteria = function(crit, specs) {","  var res = {},","    val,","    falseVals,","    trueVals,","    startToken,","    endToken,","    isRegex","","  if (!crit || !specs) {","    return null","  }","","  for (var key in specs) {","    val = crit[key]","    if (typeof val !== 'undefined') {","      if (specs[key].isBoolean) {","        trueVals = specs[key].trueValues || ['true', '1']","        falseVals = specs[key].falseValues","","        val = (falseVals &amp;&amp; falseVals.length ? falseVals.indexOf(val) &lt; 0 : trueVals.indexOf(val) &gt;= 0)","      } else if (specs[key].wrapInRegex) {","        // If starts with '*', make a endsWith search","        // If ends with '*', make a startsWith search","        // If starts and ends with '*', make a contains search","        // If no '*' at all, do not use a regex, make an exact match criteria","        startToken = ''","        endToken = ''","        if (val.substr(val.length - 1, 1) === '*') {","          startToken = '^'","          val = val.substr(0, val.length - 1)","        }","        if (val.substr(0, 1) === '*') {","          endToken = '$'","          val = val.substr(1)","        }","        isRegex = (startToken || endToken)","        if (startToken &amp;&amp; endToken) {","          // Starts and ends with '*', so no start and end token in regex","          startToken = ''","          endToken = ''","        }","        if (isRegex) {","          val = new RegExp(startToken + me.escapeForRegex(val) + endToken, 'i')","        }","      }","      if (specs[key].mapTo) {","        // Override res[key], no matter if something was present. Do not send incoherent criteria.","        res[specs[key].mapTo] = (specs[key].isBoolean &amp;&amp; specs[key].mapReverseValue ? !val : val)","      } else {","        // Set the key as is on the result object","        res[key] = val","      }","    }","  }","  return res","}","","/*","** escapeForRegex(src)","**","** Escapes a given string for use in a regular expression.","*/","me.escapeForRegex = function(src) {","  if (!src) {","    return src","  }","  return src.replace(/[-/\\\\^$*+?.()|[\\]{}]/g, '\\\\$&amp;')","}","","module.exports = me"];

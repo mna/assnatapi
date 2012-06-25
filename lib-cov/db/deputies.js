@@ -3,43 +3,43 @@ if (typeof _$jscoverage === 'undefined') _$jscoverage = {};
 if (! _$jscoverage['db/deputies.js']) {
   _$jscoverage['db/deputies.js'] = [];
   _$jscoverage['db/deputies.js'][1] = 0;
-  _$jscoverage['db/deputies.js'][13] = 0;
-  _$jscoverage['db/deputies.js'][14] = 0;
-  _$jscoverage['db/deputies.js'][18] = 0;
-  _$jscoverage['db/deputies.js'][19] = 0;
+  _$jscoverage['db/deputies.js'][15] = 0;
+  _$jscoverage['db/deputies.js'][16] = 0;
   _$jscoverage['db/deputies.js'][20] = 0;
-  _$jscoverage['db/deputies.js'][25] = 0;
-  _$jscoverage['db/deputies.js'][26] = 0;
-  _$jscoverage['db/deputies.js'][30] = 0;
-  _$jscoverage['db/deputies.js'][31] = 0;
+  _$jscoverage['db/deputies.js'][21] = 0;
+  _$jscoverage['db/deputies.js'][22] = 0;
+  _$jscoverage['db/deputies.js'][27] = 0;
+  _$jscoverage['db/deputies.js'][28] = 0;
   _$jscoverage['db/deputies.js'][32] = 0;
+  _$jscoverage['db/deputies.js'][33] = 0;
+  _$jscoverage['db/deputies.js'][34] = 0;
 }
 _$jscoverage['db/deputies.js'][1]++;
-var connect = require("./connect"), util = require("../util"), noevil = require("see-no-evil"), CriteriaSpec = {active: {isBoolean: true, mapTo: "isActive"}, a: {isBoolean: true, mapTo: "isActive"}, inactive: {isBoolean: true, mapTo: "isActive", mapReverseValue: true}, i: {isBoolean: true, mapTo: "isActive", mapReverseValue: true}};
-_$jscoverage['db/deputies.js'][13]++;
+var connect = require("./connect"), util = require("../util"), noevil = require("see-no-evil"), CriteriaSpec = {active: {isBoolean: true, mapTo: "isActive"}, a: {isBoolean: true, mapTo: "isActive"}, inactive: {isBoolean: true, mapTo: "isActive", mapReverseValue: true}, i: {isBoolean: true, mapTo: "isActive", mapReverseValue: true}, district: {wrapInRegex: true}, party: {wrapInRegex: true}};
+_$jscoverage['db/deputies.js'][15]++;
 module.exports.get = (function (depId, cb) {
-  _$jscoverage['db/deputies.js'][14]++;
+  _$jscoverage['db/deputies.js'][16]++;
   var wrap = noevil({error: cb});
-  _$jscoverage['db/deputies.js'][18]++;
-  connect.ensureConnected(wrap((function (nul, db) {
-  _$jscoverage['db/deputies.js'][19]++;
-  db.collection("deputies", wrap((function (nul, depsColl) {
   _$jscoverage['db/deputies.js'][20]++;
+  connect.ensureConnected(wrap((function (nul, db) {
+  _$jscoverage['db/deputies.js'][21]++;
+  db.collection("deputies", wrap((function (nul, depsColl) {
+  _$jscoverage['db/deputies.js'][22]++;
   depsColl.findOne({id: depId}, cb);
 })));
 })));
 });
-_$jscoverage['db/deputies.js'][25]++;
+_$jscoverage['db/deputies.js'][27]++;
 module.exports.getAll = (function (qs, cb) {
-  _$jscoverage['db/deputies.js'][26]++;
+  _$jscoverage['db/deputies.js'][28]++;
   var wrap = noevil({error: cb});
-  _$jscoverage['db/deputies.js'][30]++;
-  connect.ensureConnected(wrap((function (nul, db) {
-  _$jscoverage['db/deputies.js'][31]++;
-  db.collection("deputies", wrap((function (nul, depsColl) {
   _$jscoverage['db/deputies.js'][32]++;
+  connect.ensureConnected(wrap((function (nul, db) {
+  _$jscoverage['db/deputies.js'][33]++;
+  db.collection("deputies", wrap((function (nul, depsColl) {
+  _$jscoverage['db/deputies.js'][34]++;
   depsColl.find(util.normalizeCriteria(qs, CriteriaSpec), util.buildOptionsObject(qs)).toArray(cb);
 })));
 })));
 });
-_$jscoverage['db/deputies.js'].source = ["var connect = require('./connect'),","  util = require('../util'),","  noevil = require('see-no-evil'),","","  // The criteria specifications for getAll","  CriteriaSpec = {","    active: {isBoolean: true, mapTo: 'isActive'},","    a: {isBoolean: true, mapTo: 'isActive'},","    inactive: {isBoolean: true, mapTo: 'isActive', mapReverseValue: true},","    i: {isBoolean: true, mapTo: 'isActive', mapReverseValue: true}","  }","","module.exports.get = function(depId, cb) {","  var wrap = noevil({","    error: cb","  })","","  connect.ensureConnected(wrap(function(nul, db) {","    db.collection('deputies', wrap(function(nul, depsColl) {","      depsColl.findOne({id: depId}, cb)","    }))","  }))","}","","module.exports.getAll = function(qs, cb) {","  var wrap = noevil({","    error: cb","  })","","  connect.ensureConnected(wrap(function(nul, db) {","    db.collection('deputies', wrap(function(nul, depsColl) {","      depsColl.find(","        util.normalizeCriteria(qs, CriteriaSpec),","        util.buildOptionsObject(qs)","      ).toArray(cb)","    }))","  }))","}"];
+_$jscoverage['db/deputies.js'].source = ["var connect = require('./connect'),","  util = require('../util'),","  noevil = require('see-no-evil'),","","  // The criteria specifications for getAll","  CriteriaSpec = {","    active: {isBoolean: true, mapTo: 'isActive'},","    a: {isBoolean: true, mapTo: 'isActive'},","    inactive: {isBoolean: true, mapTo: 'isActive', mapReverseValue: true},","    i: {isBoolean: true, mapTo: 'isActive', mapReverseValue: true},","    district: {wrapInRegex: true},","    party: {wrapInRegex: true}","  }","","module.exports.get = function(depId, cb) {","  var wrap = noevil({","    error: cb","  })","","  connect.ensureConnected(wrap(function(nul, db) {","    db.collection('deputies', wrap(function(nul, depsColl) {","      depsColl.findOne({id: depId}, cb)","    }))","  }))","}","","module.exports.getAll = function(qs, cb) {","  var wrap = noevil({","    error: cb","  })","","  connect.ensureConnected(wrap(function(nul, db) {","    db.collection('deputies', wrap(function(nul, depsColl) {","      depsColl.find(","        util.normalizeCriteria(qs, CriteriaSpec),","        util.buildOptionsObject(qs)","      ).toArray(cb)","    }))","  }))","}"];
