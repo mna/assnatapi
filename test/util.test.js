@@ -184,4 +184,26 @@ describe('util', function() {
       expect(sut.buildOptionsObject({limit: '10', skip: '5', sort: 'a,-b,c', toto: '4'})).to.be.eql({limit: 10, skip: 5, sort: {a:1, b:-1,c:1}})
     })
   })
+
+  describe('.escapeForRegex', function() {
+    it('should be a function', function() {
+      expect(sut.escapeForRegex).to.be.a('function')
+    })
+
+    it('should escape a simple string', function() {
+      expect(sut.escapeForRegex('[not(a.reg$exp)]!')).to.be('\\[not\\(a\\.reg\\$exp\\)\\]!')
+    })
+
+    it('should escape the whole bunch of characters', function() {
+      expect(sut.escapeForRegex('[-/\\^$*+?.()|[]{}]')).to.be('\\[\\-\\/\\\\\\^\\$\\*\\+\\?\\.\\(\\)\\|\\[\\]\\{\\}\\]')
+    })
+
+    it('should return untouched if nothing to escape', function() {
+      expect(sut.escapeForRegex('test')).to.be('test')
+    })
+
+    it('should return null if null', function() {
+      expect(sut.escapeForRegex(null)).to.be(null)
+    })
+  })
 })
