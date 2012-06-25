@@ -80,6 +80,14 @@ describe('util', function() {
       expect(sut.normalizeCriteria({a: 'true'}, {a: {isBoolean: true, falseValues: ["true"]}})).to.be.eql({a: false})
     })
 
+    it('should return a regular expression if requested', function() {
+      expect(sut.normalizeCriteria({a: 'test'}, {a: {wrapInRegex: true}}).a.toString()).to.be('/test/i')
+    })
+
+    it('should return the escaped string as regular expression if requested', function() {
+      expect(sut.normalizeCriteria({a: '/test[-]$'}, {a: {wrapInRegex: true}}).a.toString()).to.be('/\\/test\\[\\-\\]\\$/i')
+    })
+
     it('should return an object with the mapTo property', function() {
       expect(sut.normalizeCriteria({a: 'toto'}, {a: {mapTo: 'b'}})).to.be.eql({b: 'toto'})
     })

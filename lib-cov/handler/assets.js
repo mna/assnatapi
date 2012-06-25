@@ -11,7 +11,7 @@ if (! _$jscoverage['handler/assets.js']) {
   _$jscoverage['handler/assets.js'][17] = 0;
 }
 _$jscoverage['handler/assets.js'][1]++;
-var staticServer = require("node-static"), OneDayInMs = (5184000000), path = require("path"), handler = {}, fileServer;
+var staticServer = require("node-static"), OneDayInMs = (86400000), path = require("path"), handler = {}, fileServer;
 _$jscoverage['handler/assets.js'][7]++;
 fileServer = new staticServer.Server(path.resolve(__dirname, "../../public"), {cache: OneDayInMs});
 _$jscoverage['handler/assets.js'][9]++;
@@ -26,4 +26,4 @@ handler.serveFile = (function (req, res, next) {
 });
 _$jscoverage['handler/assets.js'][17]++;
 module.exports = handler;
-_$jscoverage['handler/assets.js'].source = ["var staticServer = require('node-static'),","  OneDayInMs = (24 * 60 * 60 * 60 * 1000),","  path = require('path'),","  handler = {},","  fileServer","","fileServer = new staticServer.Server(path.resolve(__dirname, '../../public'), {cache: OneDayInMs})","","handler.serveIndex = function(req, res, next) {","  fileServer.serveFile('/index.html', 200, {}, req, res, next)","}","","handler.serveFile = function(req, res, next) {","  fileServer.serve(req, res, next)","}","","module.exports = handler"];
+_$jscoverage['handler/assets.js'].source = ["var staticServer = require('node-static'),","  OneDayInMs = (24 * 60 * 60 * 1000),","  path = require('path'),","  handler = {},","  fileServer","","fileServer = new staticServer.Server(path.resolve(__dirname, '../../public'), {cache: OneDayInMs})","","handler.serveIndex = function(req, res, next) {","  fileServer.serveFile('/index.html', 200, {}, req, res, next)","}","","handler.serveFile = function(req, res, next) {","  fileServer.serve(req, res, next)","}","","module.exports = handler"];

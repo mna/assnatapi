@@ -2,200 +2,223 @@
 if (typeof _$jscoverage === 'undefined') _$jscoverage = {};
 if (! _$jscoverage['util.js']) {
   _$jscoverage['util.js'] = [];
-  _$jscoverage['util.js'][1] = 0;
-  _$jscoverage['util.js'][11] = 0;
+  _$jscoverage['util.js'][2] = 0;
   _$jscoverage['util.js'][12] = 0;
-  _$jscoverage['util.js'][14] = 0;
+  _$jscoverage['util.js'][13] = 0;
   _$jscoverage['util.js'][15] = 0;
-  _$jscoverage['util.js'][18] = 0;
+  _$jscoverage['util.js'][16] = 0;
   _$jscoverage['util.js'][19] = 0;
   _$jscoverage['util.js'][20] = 0;
-  _$jscoverage['util.js'][23] = 0;
-  _$jscoverage['util.js'][33] = 0;
+  _$jscoverage['util.js'][21] = 0;
+  _$jscoverage['util.js'][24] = 0;
   _$jscoverage['util.js'][34] = 0;
-  _$jscoverage['util.js'][40] = 0;
-  _$jscoverage['util.js'][43] = 0;
+  _$jscoverage['util.js'][35] = 0;
+  _$jscoverage['util.js'][41] = 0;
   _$jscoverage['util.js'][44] = 0;
-  _$jscoverage['util.js'][48] = 0;
+  _$jscoverage['util.js'][45] = 0;
   _$jscoverage['util.js'][49] = 0;
-  _$jscoverage['util.js'][52] = 0;
-  _$jscoverage['util.js'][62] = 0;
+  _$jscoverage['util.js'][50] = 0;
+  _$jscoverage['util.js'][53] = 0;
   _$jscoverage['util.js'][63] = 0;
-  _$jscoverage['util.js'][65] = 0;
+  _$jscoverage['util.js'][64] = 0;
   _$jscoverage['util.js'][66] = 0;
   _$jscoverage['util.js'][67] = 0;
-  _$jscoverage['util.js'][71] = 0;
-  _$jscoverage['util.js'][80] = 0;
+  _$jscoverage['util.js'][68] = 0;
+  _$jscoverage['util.js'][72] = 0;
   _$jscoverage['util.js'][81] = 0;
-  _$jscoverage['util.js'][83] = 0;
+  _$jscoverage['util.js'][82] = 0;
   _$jscoverage['util.js'][84] = 0;
   _$jscoverage['util.js'][85] = 0;
-  _$jscoverage['util.js'][89] = 0;
-  _$jscoverage['util.js'][99] = 0;
+  _$jscoverage['util.js'][86] = 0;
+  _$jscoverage['util.js'][90] = 0;
   _$jscoverage['util.js'][100] = 0;
-  _$jscoverage['util.js'][104] = 0;
+  _$jscoverage['util.js'][101] = 0;
   _$jscoverage['util.js'][105] = 0;
-  _$jscoverage['util.js'][108] = 0;
+  _$jscoverage['util.js'][106] = 0;
   _$jscoverage['util.js'][109] = 0;
   _$jscoverage['util.js'][110] = 0;
   _$jscoverage['util.js'][111] = 0;
   _$jscoverage['util.js'][112] = 0;
-  _$jscoverage['util.js'][114] = 0;
-  _$jscoverage['util.js'][117] = 0;
-  _$jscoverage['util.js'][135] = 0;
-  _$jscoverage['util.js'][136] = 0;
-  _$jscoverage['util.js'][141] = 0;
-  _$jscoverage['util.js'][142] = 0;
-  _$jscoverage['util.js'][145] = 0;
-  _$jscoverage['util.js'][146] = 0;
+  _$jscoverage['util.js'][113] = 0;
+  _$jscoverage['util.js'][115] = 0;
+  _$jscoverage['util.js'][118] = 0;
+  _$jscoverage['util.js'][137] = 0;
+  _$jscoverage['util.js'][138] = 0;
+  _$jscoverage['util.js'][143] = 0;
+  _$jscoverage['util.js'][144] = 0;
   _$jscoverage['util.js'][147] = 0;
   _$jscoverage['util.js'][148] = 0;
   _$jscoverage['util.js'][149] = 0;
   _$jscoverage['util.js'][150] = 0;
+  _$jscoverage['util.js'][151] = 0;
   _$jscoverage['util.js'][152] = 0;
   _$jscoverage['util.js'][154] = 0;
+  _$jscoverage['util.js'][155] = 0;
   _$jscoverage['util.js'][156] = 0;
-  _$jscoverage['util.js'][159] = 0;
+  _$jscoverage['util.js'][158] = 0;
+  _$jscoverage['util.js'][160] = 0;
   _$jscoverage['util.js'][163] = 0;
-  _$jscoverage['util.js'][166] = 0;
+  _$jscoverage['util.js'][167] = 0;
+  _$jscoverage['util.js'][175] = 0;
+  _$jscoverage['util.js'][176] = 0;
+  _$jscoverage['util.js'][177] = 0;
+  _$jscoverage['util.js'][179] = 0;
+  _$jscoverage['util.js'][182] = 0;
 }
-_$jscoverage['util.js'][1]++;
+_$jscoverage['util.js'][2]++;
 var rxNumber = /^\s*\d+\s*$/, me = {DEFAULT_LIMIT: 1000};
-_$jscoverage['util.js'][11]++;
+_$jscoverage['util.js'][12]++;
 me.extend = (function (obj) {
-  _$jscoverage['util.js'][12]++;
+  _$jscoverage['util.js'][13]++;
   var args = Array.prototype.slice.call(arguments, 1);
-  _$jscoverage['util.js'][14]++;
+  _$jscoverage['util.js'][15]++;
   if (! obj) {
-    _$jscoverage['util.js'][15]++;
+    _$jscoverage['util.js'][16]++;
     return obj;
   }
-  _$jscoverage['util.js'][18]++;
-  args.forEach((function (source) {
   _$jscoverage['util.js'][19]++;
+  args.forEach((function (source) {
+  _$jscoverage['util.js'][20]++;
   for (var prop in source) {
-    _$jscoverage['util.js'][20]++;
+    _$jscoverage['util.js'][21]++;
     obj[prop] = source[prop];
 }
 }));
-  _$jscoverage['util.js'][23]++;
+  _$jscoverage['util.js'][24]++;
   return obj;
 });
-_$jscoverage['util.js'][33]++;
+_$jscoverage['util.js'][34]++;
 me.buildOptionsObject = (function (qs) {
-  _$jscoverage['util.js'][34]++;
+  _$jscoverage['util.js'][35]++;
   var opts = {}, limit = me.getLimitValue(qs), skip = me.getSkipValue(qs), sort = me.getSortObject(qs);
-  _$jscoverage['util.js'][40]++;
+  _$jscoverage['util.js'][41]++;
   opts.limit = limit;
-  _$jscoverage['util.js'][43]++;
+  _$jscoverage['util.js'][44]++;
   if (skip) {
-    _$jscoverage['util.js'][44]++;
+    _$jscoverage['util.js'][45]++;
     opts.skip = skip;
   }
-  _$jscoverage['util.js'][48]++;
+  _$jscoverage['util.js'][49]++;
   if (sort) {
-    _$jscoverage['util.js'][49]++;
+    _$jscoverage['util.js'][50]++;
     opts.sort = sort;
   }
-  _$jscoverage['util.js'][52]++;
+  _$jscoverage['util.js'][53]++;
   return opts;
 });
-_$jscoverage['util.js'][62]++;
+_$jscoverage['util.js'][63]++;
 me.getSkipValue = (function (qs) {
-  _$jscoverage['util.js'][63]++;
+  _$jscoverage['util.js'][64]++;
   var val;
-  _$jscoverage['util.js'][65]++;
+  _$jscoverage['util.js'][66]++;
   if (qs && qs.skip) {
-    _$jscoverage['util.js'][66]++;
+    _$jscoverage['util.js'][67]++;
     if (rxNumber.test(qs.skip)) {
-      _$jscoverage['util.js'][67]++;
+      _$jscoverage['util.js'][68]++;
       val = parseInt(qs.skip, 10);
     }
   }
-  _$jscoverage['util.js'][71]++;
+  _$jscoverage['util.js'][72]++;
   return val;
 });
-_$jscoverage['util.js'][80]++;
+_$jscoverage['util.js'][81]++;
 me.getLimitValue = (function (qs) {
-  _$jscoverage['util.js'][81]++;
+  _$jscoverage['util.js'][82]++;
   var val;
-  _$jscoverage['util.js'][83]++;
+  _$jscoverage['util.js'][84]++;
   if (qs && qs.limit) {
-    _$jscoverage['util.js'][84]++;
+    _$jscoverage['util.js'][85]++;
     if (rxNumber.test(qs.limit)) {
-      _$jscoverage['util.js'][85]++;
+      _$jscoverage['util.js'][86]++;
       val = Math.min(parseInt(qs.limit, 10), me.DEFAULT_LIMIT);
     }
   }
-  _$jscoverage['util.js'][89]++;
+  _$jscoverage['util.js'][90]++;
   return val || me.DEFAULT_LIMIT;
 });
-_$jscoverage['util.js'][99]++;
+_$jscoverage['util.js'][100]++;
 me.getSortObject = (function (qs) {
-  _$jscoverage['util.js'][100]++;
+  _$jscoverage['util.js'][101]++;
   var sort = {}, vals, val;
-  _$jscoverage['util.js'][104]++;
+  _$jscoverage['util.js'][105]++;
   if (! qs || ! qs.sort) {
-    _$jscoverage['util.js'][105]++;
+    _$jscoverage['util.js'][106]++;
     return null;
   }
-  _$jscoverage['util.js'][108]++;
-  vals = qs.sort.split(",");
   _$jscoverage['util.js'][109]++;
+  vals = qs.sort.split(",");
+  _$jscoverage['util.js'][110]++;
   for (var i = 0; i < vals.length; i++) {
-    _$jscoverage['util.js'][110]++;
-    val = vals[i].trim();
     _$jscoverage['util.js'][111]++;
+    val = vals[i].trim();
+    _$jscoverage['util.js'][112]++;
     if (val.substr(0, 1) === "-") {
-      _$jscoverage['util.js'][112]++;
+      _$jscoverage['util.js'][113]++;
       sort[val.substr(1)] = -1;
     }
     else {
-      _$jscoverage['util.js'][114]++;
+      _$jscoverage['util.js'][115]++;
       sort[val] = 1;
     }
 }
-  _$jscoverage['util.js'][117]++;
+  _$jscoverage['util.js'][118]++;
   return sort;
 });
-_$jscoverage['util.js'][135]++;
+_$jscoverage['util.js'][137]++;
 me.normalizeCriteria = (function (crit, specs) {
-  _$jscoverage['util.js'][136]++;
+  _$jscoverage['util.js'][138]++;
   var res = {}, val, falseVals, trueVals;
-  _$jscoverage['util.js'][141]++;
+  _$jscoverage['util.js'][143]++;
   if (! crit || ! specs) {
-    _$jscoverage['util.js'][142]++;
+    _$jscoverage['util.js'][144]++;
     return null;
   }
-  _$jscoverage['util.js'][145]++;
+  _$jscoverage['util.js'][147]++;
   for (var key in specs) {
-    _$jscoverage['util.js'][146]++;
+    _$jscoverage['util.js'][148]++;
     val = crit[key];
-    _$jscoverage['util.js'][147]++;
+    _$jscoverage['util.js'][149]++;
     if (typeof val !== "undefined") {
-      _$jscoverage['util.js'][148]++;
+      _$jscoverage['util.js'][150]++;
       if (specs[key].isBoolean) {
-        _$jscoverage['util.js'][149]++;
+        _$jscoverage['util.js'][151]++;
         trueVals = specs[key].trueValues || ["true", "1"];
-        _$jscoverage['util.js'][150]++;
-        falseVals = specs[key].falseValues;
         _$jscoverage['util.js'][152]++;
+        falseVals = specs[key].falseValues;
+        _$jscoverage['util.js'][154]++;
         val = (falseVals && falseVals.length? falseVals.indexOf(val) < 0: trueVals.indexOf(val) >= 0);
       }
-      _$jscoverage['util.js'][154]++;
+      else {
+        _$jscoverage['util.js'][155]++;
+        if (specs[key].wrapInRegex) {
+          _$jscoverage['util.js'][156]++;
+          val = new RegExp(me.escapeForRegex(val), "i");
+        }
+      }
+      _$jscoverage['util.js'][158]++;
       if (specs[key].mapTo) {
-        _$jscoverage['util.js'][156]++;
+        _$jscoverage['util.js'][160]++;
         res[specs[key].mapTo] = (specs[key].isBoolean && specs[key].mapReverseValue? ! val: val);
       }
       else {
-        _$jscoverage['util.js'][159]++;
+        _$jscoverage['util.js'][163]++;
         res[key] = val;
       }
     }
 }
-  _$jscoverage['util.js'][163]++;
+  _$jscoverage['util.js'][167]++;
   return res;
 });
-_$jscoverage['util.js'][166]++;
+_$jscoverage['util.js'][175]++;
+me.escapeForRegex = (function (src) {
+  _$jscoverage['util.js'][176]++;
+  if (! src) {
+    _$jscoverage['util.js'][177]++;
+    return src;
+  }
+  _$jscoverage['util.js'][179]++;
+  return src.replace(/[-/\\^$*+?.()|[\]{}]/g, "\\$&");
+});
+_$jscoverage['util.js'][182]++;
 module.exports = me;
-_$jscoverage['util.js'].source = ["var rxNumber = /^\\s*\\d+\\s*$/,","  me = {DEFAULT_LIMIT: 1000}","","/*","** extend(target, src1, src2, ...)","**","** Extend a given object by copying each property of the following object(s) to it.","** The last object in the list wins if there is a name conflict. This is more or less","** the same as Underscore extend().","*/","me.extend = function(obj) {","  var args = Array.prototype.slice.call(arguments, 1)","","  if (!obj) {","    return obj","  }","","  args.forEach(function(source) {","    for (var prop in source) {","      obj[prop] = source[prop]","    }","  })","  return obj","}","","/*","** buildOptionsObject(qs)","**","** Takes a parsed query string object, and builds a full options object, with","** the sort criteria, the limit value, and the skip value, ready to be used","** by db.collection.find().","*/","me.buildOptionsObject = function(qs) {","  var opts = {},","    limit = me.getLimitValue(qs),","    skip = me.getSkipValue(qs),","    sort = me.getSortObject(qs)","","  // Limit is always present","  opts.limit = limit","","  // Skip is present only if != 0","  if (skip) {","    opts.skip = skip","  }","","  // Sort is present only if specified in query string","  if (sort) {","    opts.sort = sort","  }","","  return opts","}","","/*","** getSkipValue(qs)","**","** Takes a parsed query string object, and looks for a \"skip\" key. If there is one, and it is","** a valid number, then it uses this value as the number of objects to skip before starting","** to return documents.","*/","me.getSkipValue = function(qs) {","  var val","","  if (qs &amp;&amp; qs.skip) {","    if (rxNumber.test(qs.skip)) {","      val = parseInt(qs.skip, 10)","    }","  }","","  return val","}","","/*","** getLimitValue(qs)","**","** Takes a parsed query string object, and looks for a \"limit\" key. If there is one, and it is","** a valid number, then it uses this value as the limit of objects returned.","*/","me.getLimitValue = function(qs) {","  var val","","  if (qs &amp;&amp; qs.limit) {","    if (rxNumber.test(qs.limit)) {","      val = Math.min(parseInt(qs.limit, 10), me.DEFAULT_LIMIT)","    }","  }","","  return val || me.DEFAULT_LIMIT","}","","/*","** getSortObject(qs)","**","** Takes a parsed query string object, and looks for a \"sort\" key. If there is one, then a sort","** object will be returned. Sort fields are specified as a comma-separated list of fields, and","** a descending sort may be specified by prefixing the field with a minus (-).","*/","me.getSortObject = function(qs) {","  var sort = {},","    vals,","    val","","  if (!qs || !qs.sort) {","    return null","  }","","  vals = qs.sort.split(',')","  for (var i = 0; i &lt; vals.length; i++) {","    val = vals[i].trim()","    if (val.substr(0, 1) === '-') {","      sort[val.substr(1)] = -1","    } else {","      sort[val] = 1","    }","  }","  return sort","}","","/*","** normalizeCriteria()","**","** Take a criteria object (typically, a parsed query string object) and a specifications object","** and whitelists criteria according to the specs.","**","** specs format:","** key: name of a field to act upon","** value: either a boolean (true: allow, false: ignore) or an object:","**   - isBoolean: true if the criterion is a boolean","**   - trueValues: array of values to be considered true (strings), defaults to ['true', '1']","**   - falseValues: array of values to be considered false (strings), defaults to null (uses trueValues)","**   - mapTo: name of a key to use instead of this key (ex.: \"a\" provided as a shorthand for \"active\")","**   - mapReverseValue: boolean. In the case of a boolean value, maps to \"mapTo\" and reverses the boolean value (true&lt;-&gt;false)","*/","me.normalizeCriteria = function(crit, specs) {","  var res = {},","    val,","    falseVals,","    trueVals","","  if (!crit || !specs) {","    return null","  }","","  for (var key in specs) {","    val = crit[key]","    if (typeof val !== 'undefined') {","      if (specs[key].isBoolean) {","        trueVals = specs[key].trueValues || ['true', '1']","        falseVals = specs[key].falseValues","","        val = (falseVals &amp;&amp; falseVals.length ? falseVals.indexOf(val) &lt; 0 : trueVals.indexOf(val) &gt;= 0)","      }","      if (specs[key].mapTo) {","        // Override res[key], no matter if something was present. Do not send incoherent criteria.","        res[specs[key].mapTo] = (specs[key].isBoolean &amp;&amp; specs[key].mapReverseValue ? !val : val)","      } else {","        // Set the key as is on the result object","        res[key] = val","      }","    }","  }","  return res","}","","module.exports = me"];
+_$jscoverage['util.js'].source = ["/*jshint regexdash:true*/","var rxNumber = /^\\s*\\d+\\s*$/,","  me = {DEFAULT_LIMIT: 1000}","","/*","** extend(target, src1, src2, ...)","**","** Extend a given object by copying each property of the following object(s) to it.","** The last object in the list wins if there is a name conflict. This is more or less","** the same as Underscore extend().","*/","me.extend = function(obj) {","  var args = Array.prototype.slice.call(arguments, 1)","","  if (!obj) {","    return obj","  }","","  args.forEach(function(source) {","    for (var prop in source) {","      obj[prop] = source[prop]","    }","  })","  return obj","}","","/*","** buildOptionsObject(qs)","**","** Takes a parsed query string object, and builds a full options object, with","** the sort criteria, the limit value, and the skip value, ready to be used","** by db.collection.find().","*/","me.buildOptionsObject = function(qs) {","  var opts = {},","    limit = me.getLimitValue(qs),","    skip = me.getSkipValue(qs),","    sort = me.getSortObject(qs)","","  // Limit is always present","  opts.limit = limit","","  // Skip is present only if != 0","  if (skip) {","    opts.skip = skip","  }","","  // Sort is present only if specified in query string","  if (sort) {","    opts.sort = sort","  }","","  return opts","}","","/*","** getSkipValue(qs)","**","** Takes a parsed query string object, and looks for a \"skip\" key. If there is one, and it is","** a valid number, then it uses this value as the number of objects to skip before starting","** to return documents.","*/","me.getSkipValue = function(qs) {","  var val","","  if (qs &amp;&amp; qs.skip) {","    if (rxNumber.test(qs.skip)) {","      val = parseInt(qs.skip, 10)","    }","  }","","  return val","}","","/*","** getLimitValue(qs)","**","** Takes a parsed query string object, and looks for a \"limit\" key. If there is one, and it is","** a valid number, then it uses this value as the limit of objects returned.","*/","me.getLimitValue = function(qs) {","  var val","","  if (qs &amp;&amp; qs.limit) {","    if (rxNumber.test(qs.limit)) {","      val = Math.min(parseInt(qs.limit, 10), me.DEFAULT_LIMIT)","    }","  }","","  return val || me.DEFAULT_LIMIT","}","","/*","** getSortObject(qs)","**","** Takes a parsed query string object, and looks for a \"sort\" key. If there is one, then a sort","** object will be returned. Sort fields are specified as a comma-separated list of fields, and","** a descending sort may be specified by prefixing the field with a minus (-).","*/","me.getSortObject = function(qs) {","  var sort = {},","    vals,","    val","","  if (!qs || !qs.sort) {","    return null","  }","","  vals = qs.sort.split(',')","  for (var i = 0; i &lt; vals.length; i++) {","    val = vals[i].trim()","    if (val.substr(0, 1) === '-') {","      sort[val.substr(1)] = -1","    } else {","      sort[val] = 1","    }","  }","  return sort","}","","/*","** normalizeCriteria()","**","** Take a criteria object (typically, a parsed query string object) and a specifications object","** and whitelists criteria according to the specs.","**","** specs format:","** key: name of a field to act upon","** value: either a boolean (true: allow, false: ignore) or an object:","**   - isBoolean: true if the criterion is a boolean","**   - wrapInRegex: true if the value should be escaped and wrapped in a regular expression (i.e.: /val/i)","**   - trueValues: array of values to be considered true (strings), defaults to ['true', '1']","**   - falseValues: array of values to be considered false (strings), defaults to null (uses trueValues)","**   - mapTo: name of a key to use instead of this key (ex.: \"a\" provided as a shorthand for \"active\")","**   - mapReverseValue: boolean. In the case of a boolean value, maps to \"mapTo\" and reverses the boolean value (true&lt;-&gt;false)","*/","me.normalizeCriteria = function(crit, specs) {","  var res = {},","    val,","    falseVals,","    trueVals","","  if (!crit || !specs) {","    return null","  }","","  for (var key in specs) {","    val = crit[key]","    if (typeof val !== 'undefined') {","      if (specs[key].isBoolean) {","        trueVals = specs[key].trueValues || ['true', '1']","        falseVals = specs[key].falseValues","","        val = (falseVals &amp;&amp; falseVals.length ? falseVals.indexOf(val) &lt; 0 : trueVals.indexOf(val) &gt;= 0)","      } else if (specs[key].wrapInRegex) {","        val = new RegExp(me.escapeForRegex(val), 'i')","      }","      if (specs[key].mapTo) {","        // Override res[key], no matter if something was present. Do not send incoherent criteria.","        res[specs[key].mapTo] = (specs[key].isBoolean &amp;&amp; specs[key].mapReverseValue ? !val : val)","      } else {","        // Set the key as is on the result object","        res[key] = val","      }","    }","  }","  return res","}","","/*","** escapeForRegex(src)","**","** Escapes a given string for use in a regular expression.","*/","me.escapeForRegex = function(src) {","  if (!src) {","    return src","  }","  return src.replace(/[-/\\\\^$*+?.()|[\\]{}]/g, '\\\\$&amp;')","}","","module.exports = me"];
