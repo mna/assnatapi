@@ -1,0 +1,300 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>assnatapi by PuerkitoBio</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>assnatapi</h1>
+        <p>Un API pour exploiter les données de l'Assemblée nationale du Québec.</p>
+        <p class="view"><a href="https://github.com/PuerkitoBio/assnatapi">View the Project on GitHub <small>PuerkitoBio/assnatapi</small></a></p>
+        <ul>
+          <li><a href="https://github.com/PuerkitoBio/assnatapi/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/PuerkitoBio/assnatapi/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/PuerkitoBio/assnatapi">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>assnatapi - un API pour l'Assemblée nationale du Québec</h1>
+
+<ul>
+<li><a href="#a1">Présentation</a></li>
+<li><a href="#a2">Pourquoi?</a></li>
+<li><a href="#a3">Statut de l'API</a></li>
+<li>
+<a href="#a4">Référence et exemples</a>
+
+<ul>
+<li><a href="#a5">Objet <em>deputy</em></a></li>
+<li><a href="#a6">Objet <em>meeting</em></a></li>
+<li><a href="#a7">Objet <em>intervention</em></a></li>
+<li><a href="#a8">Les routes et les paramètres</a></li>
+</ul>
+</li>
+<li><a href="#a12">Journal des changements</a></li>
+<li><a href="#a9">Pistes d'évolution</a></li>
+<li><a href="#a10">Détails techniques et style de code</a></li>
+<li><a href="#a11">Licence</a></li>
+</ul><p><a name="a1"></a></p>
+
+<h2>Présentation</h2>
+
+<p>Un <a href="http://en.wikipedia.org/wiki/Application_programming_interface">API</a> de type <a href="http://en.wikipedia.org/wiki/Restful">REST</a> pour permettre l'exploitation par programmation des données de l'Assemblée nationale du Québec.</p>
+
+<p>L'API se trouve à l'adresse <a href="http://assnatapi.jit.su">http://assnatapi.jit.su</a> .</p>
+
+<p><a name="a2"></a></p>
+
+<h2>Pourquoi?</h2>
+
+<p>Le <a href="http://www.assnat.qc.ca/fr/index.html">site web de l'Assemblée nationale</a> contient toutes les transcriptions textuelles des débats et des travaux des différentes commissions au parlement. Le tout est cependant dans un format HTML pratique pour un humain mais moins pour une machine. Des applications - mobiles ou non - et sites web pourraient être développés pour mieux présenter ces données et offrir différents services aux citoyen(nes) et professionnel(le)s de l'information. Cependant, en l'absence d'un format convivial à la programmation, c'est une tâche peu triviale.</p>
+
+<p>Cet API (<em>interface de programmation d'application</em>), qui repose sur les données publiques, extraites du site officiel de l'Assemblée nationale du Québec et structurées en une base de données documentaire <a href="http://www.mongodb.org/">MongoDB</a>, vise à combler cette lacune par rapport aux données ouvertes (<em>open data</em>) - à tout le moins du point de vue exploitation, l'aspect conditions d'utilisation étant hors de notre contrôle - dans cette institution au coeur de notre démocratie.</p>
+
+<p>Ce <a href="https://github.com/PuerkitoBio/assnatapi">référentiel GitHub</a> contient le code du serveur web répondant aux requêtes pour l'API seulement. Le code du programme qui extrait les données du site de l'Assemblée et les sauvegarde de façon structurée dans la base de données n'est pas encore déposé publiquement. Il le sera éventuellement, quand j'aurai terminé l'automatisation complète des tâches.</p>
+
+<p>Vous pouvez supporter le développement du projet par un don sur la <a href="http://assnatapi.jit.su">page d'accueil du site</a>.</p>
+
+<p><a name="a3"></a></p>
+
+<h2>Statut de l'API</h2>
+
+<p>La version actuelle - <code>0.1.x</code> - devrait être considérée comme une <strong>version alpha</strong>. L'idée est de la rendre disponible, tâter l'intérêt pour l'API, recevoir les commentaires et suggestions, les problèmes rencontrés, et la faire évoluer à partir de cette rétroaction. La page <a href="https://github.com/PuerkitoBio/assnatapi/issues">GitHub issues</a> du projet devrait être utilisée pour ces communications. À l'inverse, je publierai les évolutions du projet sur <a href="https://twitter.com/PuerkitoBio">mon fil Twitter</a>, sous le <em>hashtag</em> <a href="https://twitter.com/#!/search/realtime/%23assnatapi">#assnatapi</a>. La période de pause parlementaire estivale permet l'expérimentation de l'API en toute quiétude afin de préparer le tout pour une version stable à la rentrée.</p>
+
+<p>Tout peut donc être appelé à changer en cette jeune version, les URL, les noms des champs, etc. Et pour le moment, seuls les travaux du mois de juin 2012 de la 39ème législature, 2ème session sont offerts par l'API. D'autres seront ajoutés sous peu.</p>
+
+<p><a name="a4"></a></p>
+
+<h2>Référence et exemples</h2>
+
+<p>Trois types de documents peuvent être retournés par l'API. Les champs sont en anglais pour de simples questions pratiques, les accents et les mots français se prêtant moins bien à une nomenclature pour un langage de programmation, et mélanger les mots clefs des langages (en anglais, tels que <code>for</code>, <code>if</code>, etc.) avec des noms de variables ou de propriétés en français n'est pas naturel à la lecture du code.</p>
+
+<p><a name="a5"></a></p>
+
+<h3>
+<strong>deputy</strong>: un document représentant un député à l'Assemblée nationale.</h3>
+
+<p>Ce document peut contenir les champs suivants:</p>
+
+<ul>
+<li>   <strong>id</strong> : l'identifiant unique du député</li>
+<li>   <strong>url</strong> : l'URL absolue vers la page du député sur le site de l'Assemblée nationale</li>
+<li>   <strong>lastName</strong> : le nom de famille du député</li>
+<li>   <strong>firstName</strong> : le prénom du député</li>
+<li>   <strong>email</strong> : le courriel du député (facultatif)</li>
+<li>   <strong>district</strong> : la circonscription actuelle (ou la plus récente) du député</li>
+<li>   <strong>party</strong> : le parti politique actuel (ou le plus récent) du député (<code>'ind.'</code> si indépendant)</li>
+<li>   <strong>title</strong> : <code>'M.'</code> ou <code>'Mme'</code>
+</li>
+<li>   <strong>gender</strong> : le sexe du député, soit <code>'m'</code> ou <code>'f'</code>
+</li>
+<li>   <strong>picture</strong> : l'URL absolue vers la photo du député sur le site de l'Assemblée nationale. Ne devrait <strong>pas</strong> être utilisée telle quelle pour afficher la photo, celle-ci devrait être sauvegardée sur votre site web au besoin. (facultatif)</li>
+<li>   <strong>isActive</strong> : indique si le député est actuellement en fonction</li>
+<li>   <strong>interventionsPath</strong> : le chemin d'accès au document des interventions de ce député</li>
+</ul><p><a name="a6"></a></p>
+
+<h3>
+<strong>meeting</strong>: un document représentant une séance de travail à l'Assemblée nationale.</h3>
+
+<p>Ce document peut contenir les champs suivants:</p>
+
+<ul>
+<li>   <strong>id</strong> : l'identifiant unique de la séance (dans le format <code>volume.numéro</code>, ex.: <code>42.122</code>)</li>
+<li>   <strong>status</strong> : statut du contenu de la journée (le contenu est rapidement mis sur le site de l'Assemblée en version "préliminaire", puis est mis à jour plus tard en version "finale")</li>
+<li>   <strong>session</strong> : la session parlementaire dans laquelle à eu lieu cette séance (dans le format <code>législature.session</code>, ex.: <code>39.2</code>)</li>
+<li>   <strong>day</strong> : le jour de la semaine de la séance, en français (ex.: <code>vendredi</code>)</li>
+<li>   <strong>date</strong> : la date de la séance, en format ISO (ex.: <code>2012-06-12T04:00:00.000Z</code>)</li>
+<li>   <strong>interventionsPath</strong> : le chemin d'accès au document des interventions de cette séance</li>
+</ul><p><a name="a7"></a></p>
+
+<h3>
+<strong>intervention</strong>: un document représentant une intervention lors d'une séance.</h3>
+
+<p>Il peut s'agir d'une intervention d'un député, ou d'un officiel de l'assemblée (président, vice-président, etc.). Bien que l'officiel soit un député élu, comme il ne s'exprime pas en tant que député lorsqu'il remplit un tel rôle, l'intervention n'est pas rattachée à ce député. Idem pour les interventions anonymes ("Des voix" ou "Une voix", par exemple). Ce document peut contenir les champs suivants:</p>
+
+<ul>
+<li>   <strong>id</strong> : l'identifiant unique de l'intervention</li>
+<li>   <strong>subject</strong> : le sujet en cours lors de cette intervention (facultatif)</li>
+<li>   <strong>subtitle</strong> : le sous-titre du sujet en cours lors de cette intervention (facultatif)</li>
+<li>   <strong>speaker</strong> : le libellé de l'intervenant tel qu'écrit dans le journal de l'Assemblée</li>
+<li>   <strong>time</strong> : l'heure approximative de l'intervention, à 10 minutes près</li>
+<li>   <strong>text</strong> : la transcription textuelle de l'intervention. À noter que les sauts de ligne sont représentés par <code>\n</code>
+</li>
+<li>   <strong>deputyId</strong> : l'identifiant du député ayant fait l'intervention (facultatif)</li>
+<li>   <strong>meetingId</strong> : l'identifiant de la séance à laquelle appartient l'intervention</li>
+<li>   <strong>district</strong> : la circonscription du député ayant fait l'intervention, au moment de celle-ci. Peut différer de <code>district</code> du député si celui-ci a changé de circonscription depuis (facultatif)</li>
+<li>   <strong>party</strong> : le parti politique auquel appartenait le député ayant fait l'intervention au moment de celle-ci. Peut différer de <code>party</code> du député si celui-ci a changé de parti depuis (facultatif)</li>
+<li>   <strong>prevId</strong> : l'identifiant de l'intervention précédant celle-ci (facultatif)</li>
+<li>   <strong>nextId</strong> : l'identifiant de l'intervention suivant celle-ci (facultatif)</li>
+<li>   <strong>deputyPath</strong> : le chemin d'accès au document du député ayant fait cette intervention (facultatif)</li>
+<li>   <strong>meetingPath</strong> : le chemin d'accès au document de la séance à laquelle appartient cette intervention</li>
+<li>   <strong>prevInterventionPath</strong> : le chemin d'accès à l'intervention précédant celle-ci (facultatif)</li>
+<li>   <strong>nextInterventionPath</strong> : le chemin d'accès à l'intervention suivant celle-ci (facultatif)</li>
+</ul><p><a name="a8"></a></p>
+
+<h3>Les routes et les paramètres</h3>
+
+<p>Comme l'API ne permet que de la consultation, la seule méthode HTTP permise pour chaque route est un <code>'GET'</code>. Tous les résultats sont sous le format <a href="http://en.wikipedia.org/wiki/JSON">JSON</a>. Chaque route qui retourne un <code>Array</code> peut supporter un ou plusieurs filtres (critères de recherche), de même qu'un tri, une limite d'enregistrements retournés, et un nombre d'enregistrements à sauter. Plus d'informations sur le tri, la limite et le saut dans un instant. Les filtres, le tri, la limite et le saut sont spécifiés par chaîne d'interrogation (<em>query string</em>, soit la portion de l'URL qui suit un <code>'?'</code>) et sont séparés les uns des autres par le caractère <code>'&amp;'</code>.</p>
+
+<p>Un outil comme <a href="http://curl.haxx.se/">curl</a> peut être utilisé pour tester l'API et vérifier les résultats retournés, mais comme il ne s'agit que de <code>'GET'</code>, il est aussi possible de faire les appels directement depuis le fureteur Web, via la barre d'adresse.</p>
+
+<ul>
+<li>
+<p><strong>/deputies</strong> : retourne un <code>Array</code> contenant l'ensemble des députés. <a href="http://assnatapi.jit.su/deputies">Exemple</a>.</p>
+
+<p><strong>Filtres</strong>:</p>
+
+<ul>
+<li>   <em>active</em> (ou simplement <em>a</em>) ou <em>inactive</em> (ou simplement <em>i</em>). Une valeur booléenne qui peut être <code>true</code> ou <code>1</code> pour "vrai", toute autre valeur étant fausse.</li>
+<li>   <em>party</em>, un nom exact de parti (casse significative) ou une portion de nom de parti lorsque préfixé et/ou suffixé d'un astérisque <code>'*'</code> (casse non significative).</li>
+<li>   <em>district</em>, un nom exact de circonscription (casse significative) ou une portion de nom de circonscription lorsque préfixé et/ou suffixé d'un astérisque <code>'*'</code> (casse non significative). <a href="http://assnatapi.jit.su/deputies?party=Parti%20lib%C3%A9ral%20du%20Qu%C3%A9bec&amp;district=*jean*">Exemple</a>.</li>
+</ul>
+</li>
+<li>
+<p><strong>/deputies/:idDep</strong> : retourne le député correspondant à l'identifiant <code>:idDep</code>, ou un code 404 si l'identifiant n'existe pas. <a href="http://assnatapi.jit.su/deputies/charest-jean-525">Exemple</a>.</p>
+
+<p><strong>Filtres</strong>: aucun.</p>
+</li>
+<li>
+<p><strong>/deputies/:idDep/interventions</strong> : retourne un <code>Array</code> contenant l'ensemble des interventions du député identifié par <code>:idDep</code>. <a href="http://assnatapi.jit.su/deputies/charest-jean-525/interventions">Exemple</a>.</p>
+
+<p><strong>Filtres</strong>:</p>
+
+<ul>
+<li>   <em>meeting</em> qui indique l'identifiant de séance pour lequel on veut les interventions. Les autres interventions ne seront pas retournées. <a href="http://assnatapi.jit.su/deputies/charest-jean-525/interventions?meeting=42.122">Exemple</a>.</li>
+<li>   <em>party</em>, un nom exact de parti (casse significative) ou une portion de nom de parti lorsque préfixé et/ou suffixé d'un astérisque <code>'*'</code> (casse non significative).</li>
+<li>   <em>district</em>, un nom exact de circonscription (casse significative) ou une portion de nom de circonscription lorsque préfixé et/ou suffixé d'un astérisque <code>'*'</code> (casse non significative).</li>
+<li>   <em>subject</em>, un sujet exact (casse significative) ou une portion de sujet lorsque préfixé et/ou suffixé d'un astérisque <code>'*'</code> (casse non significative).</li>
+</ul>
+</li>
+<li>
+<p><strong>/deputies/:idDep/interventions/:idInt</strong> : retourne l'intervention correspondant à l'identifiant <code>:idInt</code>, ou un code 404 si l'identifiant n'existe pas ou s'il n'est pas associé au député identifié par <code>:idDep</code>. <a href="http://assnatapi.jit.su/deputies/charest-jean-525/interventions/42.122.52">Exemple</a>.</p>
+
+<p><strong>Filtres</strong>: aucun.</p>
+</li>
+<li>
+<p><strong>/meetings</strong> : retourne un <code>Array</code> contenant l'ensemble des séances. <a href="http://assnatapi.jit.su/meetings">Exemple</a>.</p>
+
+<p><strong>Filtres</strong>:</p>
+
+<ul>
+<li>   <em>session</em> qui indique l'identifiant de la session pour lequel on veut les séances (sous le format <code>législature.session</code>). <a href="http://assnatapi.jit.su/meetings?session=39.2">Exemple</a>.</li>
+</ul>
+</li>
+<li>
+<p><strong>/meetings/:idMeeting</strong> : retourne la séance correspondant à l'identifiant <code>:idMeeting</code>, ou un code 404 si l'identifiant n'existe pas. <a href="http://assnatapi.jit.su/meetings/42.123">Exemple</a>.</p>
+
+<p><strong>Filtres</strong>: aucun.</p>
+</li>
+<li>
+<p><strong>/meetings/:idMeeting/interventions</strong> : retourne un <code>Array</code> contenant l'ensemble des interventions de la séance identifiée par <code>:idMeeting</code>. <a href="http://assnatapi.jit.su/meetings/42.123/interventions">Exemple</a>.</p>
+
+<p><strong>Filtres</strong>:</p>
+
+<ul>
+<li>   <em>deputy</em> qui indique l'identifiant du député pour lequel on veut les interventions. Les autres interventions ne seront pas retournées. <a href="http://assnatapi.jit.su/meetings/42.123/interventions?deputy=blais-marguerite-1263">Exemple</a>.</li>
+<li>   <em>party</em>, un nom exact de parti (casse significative) ou une portion de nom de parti lorsque préfixé et/ou suffixé d'un astérisque <code>'*'</code> (casse non significative).</li>
+<li>   <em>district</em>, un nom exact de circonscription (casse significative) ou une portion de nom de circonscription lorsque préfixé et/ou suffixé d'un astérisque <code>'*'</code> (casse non significative).</li>
+<li>   <em>subject</em>, un sujet exact (casse significative) ou une portion de sujet lorsque préfixé et/ou suffixé d'un astérisque <code>'*'</code> (casse non significative).</li>
+</ul>
+</li>
+<li>
+<p><strong>/meetings/:idMeeting/interventions/:idInt</strong> : retourne l'intervention correspondant à l'identifiant <code>:idInt</code>, ou un code 404 si l'identifiant n'existe pas ou s'il n'est pas associé à la séance identifiée par <code>:idMeeting</code>. <a href="http://assnatapi.jit.su/meetings/42.123/interventions/42.123.1">Exemple</a>.</p>
+
+<p><strong>Filtres</strong>: aucun.</p>
+</li>
+<li>
+<p><strong>/interventions</strong> : retourne un <code>Array</code> contenant l'ensemble des interventions. <a href="http://assnatapi.jit.su/interventions">Exemple</a>.</p>
+
+<p><strong>Filtres</strong>: </p>
+
+<ul>
+<li>   <em>meeting</em> qui indique l'identifiant de la séance pour lequel on veut les interventions.</li>
+<li>   <em>deputy</em> qui indique l'identifiant du député pour lequel on veut les interventions. <a href="http://assnatapi.jit.su/interventions?meeting=42.117&amp;deputy=charest-jean-525">Exemple</a>.</li>
+<li>   <em>party</em>, un nom exact de parti (casse significative) ou une portion de nom de parti lorsque préfixé et/ou suffixé d'un astérisque <code>'*'</code> (casse non significative).</li>
+<li>   <em>district</em>, un nom exact de circonscription (casse significative) ou une portion de nom de circonscription lorsque préfixé et/ou suffixé d'un astérisque <code>'*'</code> (casse non significative).</li>
+<li>   <em>subject</em>, un sujet exact (casse significative) ou une portion de sujet lorsque préfixé et/ou suffixé d'un astérisque <code>'*'</code> (casse non significative).</li>
+</ul>
+</li>
+<li>
+<p><strong>/interventions/:idInt</strong> : retourne l'intervention correspondant à l'identifiant <code>:idInt</code>, ou un code 404 si l'identifiant n'existe pas. <a href="http://assnatapi.jit.su/interventions/42.122.52">Exemple</a>.</p>
+
+<p><strong>Filtres</strong>: aucun.</p>
+</li>
+</ul><p>Tel que promis, un mot sur le tri, la limite et le saut, qui peuvent s'appliquer à toutes les routes retournant un ensemble d'enregistrements (un <code>Array</code>). En gras, le nom de la clef à utiliser dans la chaîne d'interrogation (<em>query string</em>):</p>
+
+<ul>
+<li>   <strong>sort</strong> : Une liste de champs sur lesquels le résultat sera trié, séparés par une virgule. Pour un tri sur un champ en ordre descendant, mettre un signe négatif (<code>'-'</code>) devant le nom du champ. Se référer à la <a href="#a5">documentation sur les types d'objets</a> pour voir le nom des champs.</li>
+<li>   <strong>limit</strong> : Un nombre positif indiquant le nombre limite d'enregistrements à retourner. À noter qu'une limite est <em>toujours</em> utilisée, même si elle n'est pas spécifiée. La valeur par défaut est également la valeur maximale, soit <strong>1000</strong>.</li>
+<li>   <strong>skip</strong> : Un nombre positif indiquant le nombre d'enregistrements à sauter avant de commencer à retourner les enregistrements corresponant aux critères demandés. Utile pour implémenter un principe de pagination. Par défaut, aucun saut n'est effectué (équivalent de <code>0</code>).</li>
+</ul><p><a name="a12"></a></p>
+
+<h2>Journal des changements (<em>changelog</em>)</h2>
+
+<ul>
+<li>   <strong>v0.1.x</strong>: développement initial.</li>
+</ul><p><a name="a9"></a></p>
+
+<h2>Pistes d'évolution</h2>
+
+<p>Rien de coulé dans le béton pour le moment, mais ces points sont déjà investigués et devraient être des ajouts réalistes dans une future version:</p>
+
+<ul>
+<li>   <strong>votes</strong>: offrir un type de document indiquant, pour chaque vote nominal, quel(le) député(e) a voté pour, contre ou s'est abstenu.</li>
+<li>   <strong>travaux des commissions</strong>: pour l'instant, seuls les journaux des assemblées sont extraits et exposés par l'API. Les journaux des commissions parlementaires sont disponibles sur le site de l'Assemblée et devraient pouvoir être offerts par l'API.</li>
+<li>   <strong>ajout des sessions précédentes</strong>: tel que mentionné précédemment, seules les données de juin 2012 de la session en cours sont offertes en ce moment. D'autres s'ajouteront bientôt, en reculant des plus récentes aux plus anciennes.</li>
+<li>   <strong>amélioration des sujets</strong>: la gestion actuelle des <code>subject</code> et <code>subtitle</code> comporte quelques problèmes. J'aimerais améliorer le tout dans une future version.</li>
+</ul><p><a name="a10"></a></p>
+
+<h2>Détails techniques et style de code</h2>
+
+<p>Le serveur web utilise les technologies suivantes, toutes en logiciel libre à moins d'indication contraire:</p>
+
+<ul>
+<li>   <a href="http://nodejs.org/">node.js</a> et son gestionnaire de librairies <a href="http://npmjs.org/">npm</a>
+</li>
+<li>   les librairies <a href="http://mcavage.github.com/node-restify/">restify</a>, <a href="https://github.com/cloudhead/node-static">node-static</a>, <a href="https://github.com/mongodb/node-mongodb-native">mongodb</a>, et <a href="https://github.com/PuerkitoBio/see-no-evil">see-no-evil</a>
+</li>
+<li>   les librairies <a href="http://visionmedia.github.com/mocha/">mocha</a>, <a href="https://github.com/LearnBoost/expect.js">expect.js</a>, <a href="https://github.com/visionmedia/node-jscoverage">jscoverage</a>, <a href="https://github.com/mikeal/request">request</a> et <a href="http://sinonjs.org/">sinon.js</a> pour les tests</li>
+<li>   la base de données <a href="http://www.mongodb.org/">MongoDB</a> et le service dans les nuages <a href="https://mongohq.com">MongoHQ</a> (ce dernier est un service privé)</li>
+<li>   l'infrastructure dans les nuages <a href="http://www.nodejitsu.com/">Nodejitsu</a>
+</li>
+</ul><p>Pour le style du code, j'en parle puisque ça a généré une <a href="http://news.ycombinator.com/item?id=3842713">mini-controverse</a> dans le monde javascript et c'est important à savoir si vous souhaitez collaborer au projet, <a href="http://blog.izs.me/post/2353458699/an-open-letter-to-javascript-leaders-regarding">je n'utilise pas de point-virgule dans mon code</a>, laissant l'ASI (<em>automatic semicolon insertion</em>) faire son travail, et j'utilise <a href="http://www.jshint.com/">JSHint</a> pour valider la qualité du code, qui est plus flexible que <a href="http://www.jslint.com/">JSLint</a> de Crockford (il permet entre autre l'écriture sans <code>';'</code>). À noter par contre que je n'utilise pas le style <a href="http://npmjs.org/doc/coding-style.html">virgule en début de ligne</a> popularisé surtout par Isaac Schlueter sur npm.</p>
+
+<p><a name="a11"></a></p>
+
+<h2>Licence</h2>
+
+<p>Le code source est offert sous la licence de logiciel MIT. Les données de l'Assemblée nationale, cependant, demeurent probablement limitées par les <a href="http://www.assnat.qc.ca/fr/propos-site/droits-propriete-intellectuelle.html">conditions d'utilisation originales de l'Assemblée</a>.</p>
+      </section>
+    </div>
+    <footer>
+      <p>Project maintained by <a href="https://github.com/PuerkitoBio">PuerkitoBio</a></p>
+      <p>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></p>
+    </footer>
+    <!--[if !IE]><script>fixScale(document);</script><!--<![endif]-->
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-32794597-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>
